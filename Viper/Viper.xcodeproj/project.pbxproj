@@ -29,6 +29,8 @@
 		6C0DAC3E284063A700B3E75C /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3C284063A700B3E75C /* Entity.swift */; };
 		6C0DAC40284063B000B3E75C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3F284063B000B3E75C /* Router.swift */; };
 		6C0DAC41284063B000B3E75C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3F284063B000B3E75C /* Router.swift */; };
+		6C0DAC432841921D00B3E75C /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC422841921D00B3E75C /* View.swift */; };
+		6C0DAC442841921D00B3E75C /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC422841921D00B3E75C /* View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,7 @@
 		6C0DAC392840639B00B3E75C /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		6C0DAC3C284063A700B3E75C /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		6C0DAC3F284063B000B3E75C /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		6C0DAC422841921D00B3E75C /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,7 @@
 		6C0DAC2B2840204100B3E75C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6C0DAC422841921D00B3E75C /* View.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -376,6 +380,7 @@
 				6C0DAC1528401E4800B3E75C /* ViperApp.swift in Sources */,
 				6C0DAC3D284063A700B3E75C /* Entity.swift in Sources */,
 				6C0DAC32284044C800B3E75C /* IGDBWorker.swift in Sources */,
+				6C0DAC432841921D00B3E75C /* View.swift in Sources */,
 				6C0DAC1928401E4800B3E75C /* Persistence.swift in Sources */,
 				6C0DAC1328401E4800B3E75C /* Viper.xcdatamodeld in Sources */,
 				6C0DAC1728401E4800B3E75C /* ContentView.swift in Sources */,
@@ -391,6 +396,7 @@
 				6C0DAC1628401E4800B3E75C /* ViperApp.swift in Sources */,
 				6C0DAC3E284063A700B3E75C /* Entity.swift in Sources */,
 				6C0DAC33284044C800B3E75C /* IGDBWorker.swift in Sources */,
+				6C0DAC442841921D00B3E75C /* View.swift in Sources */,
 				6C0DAC1A28401E4800B3E75C /* Persistence.swift in Sources */,
 				6C0DAC1428401E4800B3E75C /* Viper.xcdatamodeld in Sources */,
 				6C0DAC1828401E4800B3E75C /* ContentView.swift in Sources */,
