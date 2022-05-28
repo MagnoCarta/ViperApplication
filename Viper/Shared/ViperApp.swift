@@ -17,7 +17,6 @@ struct ViperApp: App {
             let presenter = MainViewPresenter(interactor: interactor)
             
             MainView(presenter: presenter)
-                .frame(width: 1366, height: 1024, alignment: .center)
         }
     }
 }

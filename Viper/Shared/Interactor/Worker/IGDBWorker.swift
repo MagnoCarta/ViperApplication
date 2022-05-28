@@ -73,18 +73,18 @@ class IGDBWorker {
             }
             
 //            newStr = ""
-//            
+//
 //            if let index = str.index(of: "Endpoints"){
 //                newStr = String(str[index...])
 //                newStr = newStr.replacingOccurrences(of: "Endpoints", with: "")
 //            }
-//            
+//
 //            if let indexReference = newStr.index(of: "field"){
 //                newStr = String(newStr[..<indexReference])
 //            }
-//            
+//
 //            print(newStr)
-//          
+//
             
             return allEndpoints
             
