@@ -1,0 +1,34 @@
+//
+//  Presenter.swift
+//  Viper
+//
+//  Created by Gilberto vieira on 26/05/22.
+//
+
+import Foundation
+import SwiftUI
+
+class MainViewPresenter: ObservableObject {
+    
+    
+    private let interactor: MainViewInteractor
+    let endpointNames: [String]
+    private let router: MainViewRouter = MainViewRouter()
+    
+    init(interactor: MainViewInteractor) {
+        self.interactor = interactor
+        self.endpointNames = interactor.nomes
+    }
+    
+    func linkBuilder<Content: View>(
+        for endpointName: String,
+        @ViewBuilder content: () -> Content
+      ) -> some View {
+        NavigationLink(
+          destination: router.makeDetailView(
+            for: endpointName)) {
+              content()
+        }
+    }
+    
+}

@@ -13,7 +13,10 @@ struct ViperApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView(endpoints: IGDBWorker().loadEndpoints())
+            let interactor = MainViewInteractor(nomes: IGDBWorker().loadEndpoints())
+            let presenter = MainViewPresenter(interactor: interactor)
+            
+            MainView(presenter: presenter)
                 .frame(width: NSScreen.main?.frame.width, height: NSScreen.main?.frame.height, alignment: .center)
         }
     }
