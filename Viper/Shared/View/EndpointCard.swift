@@ -17,9 +17,10 @@ struct EndpointCard: View {
                 
         Rectangle()
             .cornerRadius(15)
-            .foregroundColor(.black)
+            .foregroundColor(.blue)
             .overlay(alignment: .center, content: {
                 Text(presenter.endpointName)
+                    .foregroundColor(.black)
             })
     }
     

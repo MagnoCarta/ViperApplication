@@ -10,7 +10,6 @@ import SwiftUI
 
 class MainViewPresenter: ObservableObject {
     
-    
     private let interactor: MainViewInteractor
     let endpointNames: [String]
     private let router: MainViewRouter = MainViewRouter()
@@ -18,17 +17,6 @@ class MainViewPresenter: ObservableObject {
     init(interactor: MainViewInteractor) {
         self.interactor = interactor
         self.endpointNames = interactor.nomes
-    }
-    
-    func linkBuilder<Content: View>(
-        for endpointName: String,
-        @ViewBuilder content: () -> Content
-      ) -> some View {
-        NavigationLink(
-          destination: router.makeDetailView(
-            for: endpointName)) {
-              content()
-        }
     }
     
 }

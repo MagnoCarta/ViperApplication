@@ -10,7 +10,6 @@ import SwiftUI
 
 
 struct MainView: View {
-    
     var columns: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -19,22 +18,44 @@ struct MainView: View {
     @ObservedObject var presenter: MainViewPresenter
     
     var body: some View {
-        //NavigationView {
-        ScrollView {
-            // 4. Populate into grid
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(presenter.endpointNames,id:\.self) { endpoint in
-                    let interactor = EndpointCardInteractor(nome: endpoint)
-                    let endpointPresenter = EndpointCardPresenter(interactor: interactor)
-                    self.presenter.linkBuilder(for: endpoint, content: {
-                        EndpointCard(presenter: endpointPresenter)
-                           
-                    })
-                    .frame(height: height)
+        
+#if os(iOS)
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(presenter.endpointNames,id:\.self) { endpoint in
+                        NavigationLink {
+                            let interactor = DetailViewInteractor(nome: endpoint)
+                            let detailViewPresenter = DetailViewPresenter(interactor: interactor)
+                            DetailView(presenter: detailViewPresenter)
+                        } label: {
+                            let interactor = EndpointCardInteractor(nome: endpoint)
+                            let endpointPresenter = EndpointCardPresenter(interactor: interactor)
+                            EndpointCard(presenter: endpointPresenter)
+                        }
+                        .frame(width: 150, height: 150, alignment: .center)
+                    }
                 }
+                .padding()
             }
-            .padding()
+            .navigationTitle("Endpoints")
         }
-       // }
+#elseif os(macOS)
+        NavigationView {
+            List(presenter.endpointNames,id:\.self) { endpoint in
+                        NavigationLink {
+                            let interactor = DetailViewInteractor(nome: endpoint)
+                            let detailViewPresenter = DetailViewPresenter(interactor: interactor)
+                            DetailView(presenter: detailViewPresenter)
+                        } label: {
+                            let interactor = EndpointCardInteractor(nome: endpoint)
+                            let endpointPresenter = EndpointCardPresenter(interactor: interactor)
+                            EndpointCard(presenter: endpointPresenter)
+                        }
+                        .frame(width: 150, height: 150, alignment: .center)
+                    }
+                }
+            .navigationTitle("Endpoints")
+#endif
     }
 }
