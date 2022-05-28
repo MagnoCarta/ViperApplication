@@ -47,6 +47,39 @@ class IGDBWorker {
         task.resume()
     }
     
+    func loadEndpoints() -> [String] {
+        let url = URL(string: "https://api-docs.igdb.com/#endpoints")
+        
+        do {
+            let content = try String(contentsOf: url!, encoding: .utf8)
+            let str = content.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+            var newStr: String = ""
+            
+            if let index = str.index(of: "Endpoints"){
+                newStr = String(str[index...])
+                newStr = newStr.replacingOccurrences(of: "Endpoints", with: "")
+            }
+            
+            if let indexReference = newStr.index(of: "Reference"){
+                newStr = String(newStr[..<indexReference])
+            }
+          
+            var allEndpoints = newStr.components(separatedBy: "  ").filter({
+                $0 != "\n" && $0 != ""
+            })
+            
+            allEndpoints =  allEndpoints.map {
+                $0.replacingOccurrences(of: "\n", with: "")
+            }
+            
+            return allEndpoints
+            
+        } catch let error {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
     func retrieveQuote(at index: Int) {
 //        guard let quotes = self.quotes, quotes.indices.contains(index) else {
 //            self.presenter?.getQuoteFailure()
@@ -55,4 +88,10 @@ class IGDBWorker {
 //        self.presenter?.getQuoteSuccess(self.quotes![index])
     }
 
+}
+
+extension StringProtocol {
+    func index<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> Index? {
+        range(of: string, options: options)?.lowerBound
+    }
 }

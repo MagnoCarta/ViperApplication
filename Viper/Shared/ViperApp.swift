@@ -13,8 +13,8 @@ struct ViperApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            MainView(endpoints: IGDBWorker().loadEndpoints())
+                .frame(width: NSScreen.main?.frame.width, height: NSScreen.main?.frame.height, alignment: .center)
         }
     }
 }
