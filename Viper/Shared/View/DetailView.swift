@@ -13,9 +13,9 @@ struct DetailView: View {
     @ObservedObject var presenter: DetailViewPresenter
     
     var body: some View {
-        
-        Text(presenter.endpointName)
-        
+        Button(presenter.endpointName, action: {
+            IGDBWorker().loadEndpointInfo(endpoint: presenter.endpointName)
+        })
     }
     
 }
