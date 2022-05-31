@@ -12,7 +12,7 @@ import SwiftUI
 class MainViewRouter {
   func makeDetailView(for endpointName: String) -> some View {
     let presenter = DetailViewPresenter(interactor: DetailViewInteractor(nome: endpointName))
-    return DetailView(presenter: presenter)
+      return DetailView(presenter: presenter,Botaomaluco: presenter.endpointName)
   }
 }
 

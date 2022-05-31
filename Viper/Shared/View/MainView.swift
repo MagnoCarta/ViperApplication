@@ -46,7 +46,7 @@ struct MainView: View {
                         NavigationLink {
                             let interactor = DetailViewInteractor(nome: endpoint)
                             let detailViewPresenter = DetailViewPresenter(interactor: interactor)
-                            DetailView(presenter: detailViewPresenter)
+                            DetailView(presenter: detailViewPresenter,Botaomaluco: detailViewPresenter.endpointName)
                         } label: {
                             let interactor = EndpointCardInteractor(nome: endpoint)
                             let endpointPresenter = EndpointCardPresenter(interactor: interactor)

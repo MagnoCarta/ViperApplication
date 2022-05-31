@@ -10,7 +10,7 @@ import SwiftUI
 
 class MainViewInteractor {
     
-    let worker: IGDBWorker = IGDBWorker()
+    let worker: IGDBWorker = IGDBWorker.worker
     let nomes: [String]
     //let presenter:
     

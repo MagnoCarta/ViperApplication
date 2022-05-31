@@ -13,10 +13,14 @@ class IGDBWorker {
     
     // MARK: Properties
     //weak var presenter: InteractorToPresenterQuotesProtocol?
-    var gameGenres: [String]?
-    var allEndpoints: [String]?
     
-    func loadEndpointInfo(endpoint: String) {
+    static let worker = IGDBWorker()
+    
+    private init(){}
+
+    var allEndpoints: [String] = []
+    
+    func loadEndpointInfo(endpoint: String,completionHandler: @escaping (Any) -> Void ) {
         print("Interactor receives the request from Presenter to load quotes from the server.")
         var pluralEndpoint = endpoint.last == "y" ? "\(endpoint[..<endpoint.index(of: "y")!])ies" : "\(endpoint)s"
         pluralEndpoint = (pluralEndpoint.replacingOccurrences(of: " ", with: "_")).lowercased()
@@ -25,10 +29,12 @@ class IGDBWorker {
         request.httpMethod = "POST"
         request.setValue("Bearer be60orsu3ac3r7j9r0ynn1njtbzt5y", forHTTPHeaderField: "Authorization")
         request.setValue("sp8ryigsauyi3uivnmmo3hydbv8fui", forHTTPHeaderField: "Client-ID")
-        loadEndpoints()
-        let endpointIndex = (allEndpoints?.firstIndex(of: endpoint))!
+        if allEndpoints.isEmpty  {
+            allEndpoints = loadEndpoints()
+        }
+        let endpointIndex = (allEndpoints.firstIndex(of: endpoint))!
         let field = getFields()[endpointIndex]
-    //    print(field)
+        print(field)
         let postString = field
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
@@ -41,7 +47,7 @@ class IGDBWorker {
                     fatalError("JSON FAIL")
                 }
                 
-                //print(json)
+                completionHandler(json)
                 
             } catch let error {
                 print(error)
@@ -55,7 +61,7 @@ class IGDBWorker {
     }
     
     func loadEndpoints() -> [String] {
-        let url = URL(string: "https://api-docs.igdb.com/#endpoints")
+        let url = URL(string: "https://api-docs.igdb.com")
         
         do {
             let content = try String(contentsOf: url!, encoding: .utf8)
@@ -78,35 +84,8 @@ class IGDBWorker {
             allEndpoints =  allEndpoints.map {
                 $0.replacingOccurrences(of: "\n", with: "")
             }
-            let url2 = URL(string: "https://api-docs.igdb.com/?swift#game")
-            
-            let content2 = try String(contentsOf: url2!, encoding: .utf8)
-            var str2 = content2.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-            
-            var newStr2: String = ""
-            
-            let indices = str2.indices(of: "request.body")
-            var endPointfields: [String] = []
-            func updateNewStr2(times: Int) {
-                var updatedStr2 = str2
-                for i in 0...times-1 {
-                    updatedStr2 = String(str2[indices[i]...])
-                    let firstEndpointIndex = updatedStr2.index(of: "fields")!
-                    let endEndpointIndex = updatedStr2.index(of: ";&")!
-                    let fields = String(updatedStr2[firstEndpointIndex...endEndpointIndex])
-                    endPointfields.append(fields)
-                }
-            }
-            
-            updateNewStr2(times: 38)
 
-            
-            
-//            print(indices)
-//            print(str2)
-//
             self.allEndpoints = allEndpoints
-          //  getFields()
             return allEndpoints
             
         } catch let error {
@@ -116,12 +95,10 @@ class IGDBWorker {
     }
     
     func getFields() -> [String] {
-        let url2 = URL(string: "https://api-docs.igdb.com/?swift#game")
+        let url2 = URL(string: "https://api-docs.igdb.com/?swift")
         do {
         let content2 = try String(contentsOf: url2!, encoding: .utf8)
-        var str2 = content2.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-        
-        var newStr2: String = ""
+        let str2 = content2.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
         
         let indices = str2.indices(of: "request.body")
         var endPointfields: [String] = []
@@ -136,7 +113,7 @@ class IGDBWorker {
             }
         }
         
-            updateNewStr2(times: 38)
+            updateNewStr2(times: allEndpoints.count)
             return endPointfields
         } catch let error {print(error.localizedDescription)
             return []
@@ -195,6 +172,3 @@ extension StringProtocol {
             return String(self[startIndex..<endIndex])
         }
 }
-
-//
-//fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,collection,cover,created_at,dlcs,expanded_games,expansions,external_games,first_release_date,follows,forks,franchise,franchises,game_engines,game_modes,genres,hypes,involved_companies,keywords,multiplayer_modes,name,parent_game,platforms,player_perspectives,ports,rating,rating_count,release_dates,remakes,remasters,screenshots,similar_games,slug,standalone_expansions,status,storyline,summary,tags,themes,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites
