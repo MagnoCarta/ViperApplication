@@ -34,7 +34,7 @@ class IGDBWorker {
         }
         let endpointIndex = (allEndpoints.firstIndex(of: endpoint))!
         let field = getFields()[endpointIndex]
-        print(field)
+        
         let postString = field
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
@@ -43,10 +43,15 @@ class IGDBWorker {
                     fatalError("data FAIL")
                 }
                 
-                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
-                    fatalError("JSON FAIL")
-                }
+                let jsonDecoder = JSONDecoder()
                 
+                let json = try jsonDecoder.decode([GameEntity].self, from: data)
+                
+                
+//                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
+//                    fatalError("JSON FAIL")
+//                }
+//
                 completionHandler(json)
                 
             } catch let error {
