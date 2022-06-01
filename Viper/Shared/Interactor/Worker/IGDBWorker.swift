@@ -20,9 +20,13 @@ class IGDBWorker {
 
     var allEndpoints: [String] = []
     
-    func loadEndpointInfo(endpoint: String,completionHandler: @escaping (Any) -> Void ) {
+    func loadEndpointInfo<T: Codable>(endpointType: T.Type, completionHandler: @escaping (Any) -> Void ) {
         print("Interactor receives the request from Presenter to load quotes from the server.")
-        var pluralEndpoint = endpoint.last == "y" ? "\(endpoint[..<endpoint.index(of: "y")!])ies" : "\(endpoint)s"
+        guard let endpoint = Endpoint.getEndpointFromArrayType(type: endpointType) else {
+            return
+        }
+        let endpointString = endpoint.rawValue
+        var pluralEndpoint = endpointString.last == "y" ? "\(endpointString[..<endpointString.index(of: "y")!])ies" : "\(endpointString)s"
         pluralEndpoint = (pluralEndpoint.replacingOccurrences(of: " ", with: "_")).lowercased()
         guard let url = URL(string: "https://api.igdb.com/v4/\(pluralEndpoint)") else { return  }
         var request = URLRequest(url: url)
@@ -32,7 +36,7 @@ class IGDBWorker {
         if allEndpoints.isEmpty  {
             allEndpoints = loadEndpoints()
         }
-        let endpointIndex = (allEndpoints.firstIndex(of: endpoint))!
+        let endpointIndex = (allEndpoints.firstIndex(of: endpointString))!
         let field = getFields()[endpointIndex]
         
         let postString = field
@@ -45,7 +49,7 @@ class IGDBWorker {
                 
                 let jsonDecoder = JSONDecoder()
                 
-                let json = try jsonDecoder.decode([GameEntity].self, from: data)
+                let json = try jsonDecoder.decode(endpointType, from: data)
                 
                 
 //                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {

@@ -14,11 +14,7 @@ import Foundation
 
 // MARK: - GameEntity
 struct GameEntity: Codable, StructDecoder {
-    func fetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
-        
-    }
-    
-    static var EntityName:String  = "GameEntity"
+    static var entityName: String = "Game"
     
     let id, category: Int
     let cover: Int?
@@ -89,5 +85,3 @@ struct GameEntity: Codable, StructDecoder {
         case remasters
     }
 }
-
-typealias Game = [GameEntity]

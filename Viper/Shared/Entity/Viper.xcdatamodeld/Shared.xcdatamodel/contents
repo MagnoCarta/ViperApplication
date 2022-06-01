@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Character" representedClassName="Character" syncable="YES" codeGenerationType="class">
+        <attribute name="characterDescription" optional="YES" attributeType="String"/>
+        <attribute name="checksum" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="games" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mugShot" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="slug" optional="YES" attributeType="String"/>
+        <attribute name="species" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Company" representedClassName="Company" syncable="YES" codeGenerationType="class"/>
+    <entity name="Game" representedClassName="Game" syncable="YES" codeGenerationType="class">
+        <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character"/>
+    </entity>
+    <entity name="Platform" representedClassName="Platform" syncable="YES" codeGenerationType="class"/>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Character" positionX="-361.9649047851562" positionY="129.7334594726562" width="128" height="223"/>
+        <element name="Game" positionX="-54" positionY="-9" width="128" height="44"/>
+        <element name="Platform" positionX="-36" positionY="9" width="128" height="29"/>
+        <element name="Company" positionX="-18" positionY="27" width="128" height="29"/>
     </elements>
 </model>

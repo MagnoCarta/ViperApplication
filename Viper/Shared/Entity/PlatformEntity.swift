@@ -9,7 +9,9 @@
 import Foundation
 
 // MARK: - PlatformEntity
-struct PlatformEntity: Codable {
+struct PlatformEntity: Codable, StructDecoder {
+    static var entityName: String = "Platform"
+    
     let id: Int
     let alternativeName: String?
     let category: Int?
@@ -39,6 +41,3 @@ struct PlatformEntity: Codable {
         case abbreviation, summary
     }
 }
-
-typealias Platform = [PlatformEntity]
-

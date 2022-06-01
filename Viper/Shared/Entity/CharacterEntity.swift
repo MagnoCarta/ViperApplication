@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - CharacterEntity
 struct CharacterEntity: Codable, StructDecoder {
-    static var EntityName:String  = "CharacterEntity"
+    static var entityName: String = "Character"
     
     let id, createdAt: Int
     let games: [Int]?
@@ -32,5 +32,3 @@ struct CharacterEntity: Codable, StructDecoder {
         case characterDescription = "description"
     }
 }
-
-typealias Character = [CharacterEntity]

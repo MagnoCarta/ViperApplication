@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57B2F692284708A100811ED0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2F691284708A100811ED0 /* Endpoint.swift */; };
+		57B2F693284708A100811ED0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2F691284708A100811ED0 /* Endpoint.swift */; };
 		6C0406112846CBFD0012DC32 /* CharacterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0406102846CBFD0012DC32 /* CharacterEntity.swift */; };
 		6C0406122846CBFD0012DC32 /* CharacterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0406102846CBFD0012DC32 /* CharacterEntity.swift */; };
 		6C0406142846CCA20012DC32 /* CompanyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0406132846CCA20012DC32 /* CompanyEntity.swift */; };
@@ -73,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57B2F691284708A100811ED0 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		6C0406102846CBFD0012DC32 /* CharacterEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterEntity.swift; sourceTree = "<group>"; };
 		6C0406132846CCA20012DC32 /* CompanyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyEntity.swift; sourceTree = "<group>"; };
 		6C0406162846CD310012DC32 /* GameEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEntity.swift; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 				6C0406132846CCA20012DC32 /* CompanyEntity.swift */,
 				6C0406162846CD310012DC32 /* GameEntity.swift */,
 				6C0406192846CEC80012DC32 /* PlatformEntity.swift */,
+				57B2F691284708A100811ED0 /* Endpoint.swift */,
 				6C0DABE828401E4600B3E75C /* Viper.xcdatamodeld */,
 			);
 			path = Entity;
@@ -342,7 +346,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					6C0DABF128401E4800B3E75C = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -425,6 +429,7 @@
 				6C0DAC4628419F5400B3E75C /* EndpointCard.swift in Sources */,
 				6C0DAC522841B57800B3E75C /* DetailView.swift in Sources */,
 				6C0DAC552841B60400B3E75C /* DetailViewPresenter.swift in Sources */,
+				57B2F692284708A100811ED0 /* Endpoint.swift in Sources */,
 				6C0DAC1528401E4800B3E75C /* ViperApp.swift in Sources */,
 				6C0406142846CCA20012DC32 /* CompanyEntity.swift in Sources */,
 				6C0DAC3D284063A700B3E75C /* CoreDataEntity.swift in Sources */,
@@ -452,6 +457,7 @@
 				6C0DAC4728419F5400B3E75C /* EndpointCard.swift in Sources */,
 				6C0DAC532841B57800B3E75C /* DetailView.swift in Sources */,
 				6C0DAC562841B60400B3E75C /* DetailViewPresenter.swift in Sources */,
+				57B2F693284708A100811ED0 /* Endpoint.swift in Sources */,
 				6C0DAC1628401E4800B3E75C /* ViperApp.swift in Sources */,
 				6C0406152846CCA20012DC32 /* CompanyEntity.swift in Sources */,
 				6C0DAC3E284063A700B3E75C /* CoreDataEntity.swift in Sources */,
@@ -677,6 +683,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -703,6 +710,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

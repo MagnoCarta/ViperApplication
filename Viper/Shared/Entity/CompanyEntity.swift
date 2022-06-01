@@ -9,7 +9,9 @@
 import Foundation
 
 // MARK: - CompanyEntity
-struct CompanyEntity: Codable {
+struct CompanyEntity: Codable, StructDecoder {
+    static var entityName: String = "Company"
+    
     let id, changeDateCategory: Int
     let country: Int?
     let createdAt: Int
@@ -40,6 +42,3 @@ struct CompanyEntity: Codable {
         case changedCompanyID = "changed_company_id"
     }
 }
-
-typealias Company = [CompanyEntity]
-

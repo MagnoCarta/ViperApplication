@@ -16,18 +16,16 @@ struct DetailView: View {
     
     var body: some View {
         return Button(Botaomaluco, action: {
-            IGDBWorker.worker.loadEndpointInfo(endpoint: presenter.endpointName, completionHandler: { result in
-                print(result)
+            IGDBWorker.worker.loadEndpointInfo(endpointType: Endpoint(rawValue: presenter.endpointName)!.getArrayType(), completionHandler: { result in
                 // Create a fetch request with a string filter
                 // for an entity’s name
                 let context = PersistenceController.shared.container.viewContext
-                let entity = NSEntityDescription.entity(forEntityName: GameEntity.EntityName, in: context)
                 
-                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: (entity?.name)!)
+                let fetchRequest = Character.fetchRequest()
 
-                fetchRequest.predicate = NSPredicate(
-                    format: "name LIKE %@", "Robert"
-                )
+//                fetchRequest.predicate = NSPredicate(
+//                    format: "name LIKE %@", "Robert"
+//                )
 
                 // Get a reference to a NSManagedObjectContext
 
@@ -35,7 +33,8 @@ struct DetailView: View {
                 // matching the predicate
                 let objects = try? context.fetch(fetchRequest)
                 print(objects)
-                try? (result as! StructDecoder).toCoreData(context: context)
+                let managedObjects = (result as! [StructDecoder]).forEach({ try? $0.toCoreData(context: context) })
+                try? context.save()
 //                let dictionary = json as! [[String : Any]]
 //
 //                //let decoder = StructDecoder()
