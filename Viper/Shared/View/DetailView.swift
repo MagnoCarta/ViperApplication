@@ -12,16 +12,26 @@ import CoreData
 struct DetailView: View {
     
     @ObservedObject var presenter: DetailViewPresenter
-    @State var Botaomaluco: String
+    @State var Botaomaluco: Endpoint
     
     var body: some View {
-        return Button(Botaomaluco, action: {
-            IGDBWorker.worker.loadEndpointInfo(endpointType: Endpoint(rawValue: presenter.endpointName)!.getArrayType(), completionHandler: { result in
+        return Button(Botaomaluco.rawValue, action: {
+            IGDBWorker.worker.loadEndpointInfo(endpoint: Botaomaluco, completionHandler: { result in
                 // Create a fetch request with a string filter
                 // for an entity’s name
                 let context = PersistenceController.shared.container.viewContext
                 
-                let fetchRequest = Character.fetchRequest()
+                var fetchRequest: NSFetchRequest<NSFetchRequestResult>?
+                switch Botaomaluco {
+                case .character:
+                    fetchRequest = Character.fetchRequest()
+                case .company:
+                    fetchRequest = Company.fetchRequest()
+                case .game:
+                    fetchRequest = Game.fetchRequest()
+                case .platform:
+                    fetchRequest = Platform.fetchRequest()
+                }
 
 //                fetchRequest.predicate = NSPredicate(
 //                    format: "name LIKE %@", "Robert"
@@ -31,7 +41,7 @@ struct DetailView: View {
 
                 // Perform the fetch request to get the objects
                 // matching the predicate
-                let objects = try? context.fetch(fetchRequest)
+                let objects = try? context.fetch(fetchRequest!)
                 print(objects)
                 let managedObjects = (result as! [StructDecoder]).forEach({ try? $0.toCoreData(context: context) })
                 try? context.save()

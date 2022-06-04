@@ -9,11 +9,11 @@ import Foundation
 
 class EndpointCardInteractor {
     
-    let nome: String
+    let endpoint: Endpoint
     //let presenter:
     
-    init(nome: String) {
-        self.nome = nome
+    init(endpoint: Endpoint) {
+        self.endpoint = endpoint
     }
     
 }

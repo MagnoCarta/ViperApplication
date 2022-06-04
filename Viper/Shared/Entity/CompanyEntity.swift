@@ -12,18 +12,18 @@ import Foundation
 struct CompanyEntity: Codable, StructDecoder {
     static var entityName: String = "Company"
     
-    let id, changeDateCategory: Int
+    let id, changeDateCategory: Int?
     let country: Int?
-    let createdAt: Int
+    let createdAt: Int?
     let companyDescription: String?
     let developed: [Int]?
     let logo: Int?
-    let name, slug: String
+    let name, slug: String?
     let startDate: Int?
-    let startDateCategory, updatedAt: Int
-    let url: String
+    let startDateCategory, updatedAt: Int?
+    let url: String?
     let websites: [Int]?
-    let checksum: String
+    let checksum: String?
     let published: [Int]?
     let parent, changeDate, changedCompanyID: Int?
 

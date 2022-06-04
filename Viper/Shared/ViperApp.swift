@@ -13,7 +13,7 @@ struct ViperApp: App {
 
     var body: some Scene {
         WindowGroup {
-            let interactor = MainViewInteractor(nomes: IGDBWorker.worker.loadEndpoints())
+            let interactor = MainViewInteractor(nomes: Endpoint.allCases)
             let presenter = MainViewPresenter(interactor: interactor)
             
             MainView(presenter: presenter)

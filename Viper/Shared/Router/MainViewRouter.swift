@@ -10,8 +10,8 @@ import Foundation
 import SwiftUI
 
 class MainViewRouter {
-  func makeDetailView(for endpointName: String) -> some View {
-    let presenter = DetailViewPresenter(interactor: DetailViewInteractor(nome: endpointName))
+  func makeDetailView(for endpointName: Endpoint) -> some View {
+    let presenter = DetailViewPresenter(interactor: DetailViewInteractor(endpoint: endpointName))
       return DetailView(presenter: presenter,Botaomaluco: presenter.endpointName)
   }
 }

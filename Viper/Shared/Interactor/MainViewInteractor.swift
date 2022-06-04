@@ -11,10 +11,10 @@ import SwiftUI
 class MainViewInteractor {
     
     let worker: IGDBWorker = IGDBWorker.worker
-    let nomes: [String]
+    let nomes: [Endpoint]
     //let presenter:
     
-    init(nomes: [String]) {
+    init(nomes: [Endpoint]) {
         self.nomes = nomes
     }
     

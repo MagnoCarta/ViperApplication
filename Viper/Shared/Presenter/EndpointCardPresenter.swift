@@ -12,11 +12,11 @@ class EndpointCardPresenter: ObservableObject {
     
     
     private let interactor: EndpointCardInteractor
-    let endpointName: String
+    let endpointName: Endpoint
     //private let router = EndpointRouter()
     
     init(interactor: EndpointCardInteractor) {
         self.interactor = interactor
-        self.endpointName = interactor.nome
+        self.endpointName = interactor.endpoint
     }
 }

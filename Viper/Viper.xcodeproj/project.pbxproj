@@ -55,6 +55,8 @@
 		6C0DAC562841B60400B3E75C /* DetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC542841B60300B3E75C /* DetailViewPresenter.swift */; };
 		6C0DAC582841B61800B3E75C /* DetailViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC572841B61800B3E75C /* DetailViewInteractor.swift */; };
 		6C0DAC592841B61800B3E75C /* DetailViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC572841B61800B3E75C /* DetailViewInteractor.swift */; };
+		6CAD6B8A2847948E00C688F2 /* GenericEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B892847948E00C688F2 /* GenericEntity.swift */; };
+		6CAD6B8B2847948E00C688F2 /* GenericEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B892847948E00C688F2 /* GenericEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,7 @@
 		6C0DAC512841B57800B3E75C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		6C0DAC542841B60300B3E75C /* DetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresenter.swift; sourceTree = "<group>"; };
 		6C0DAC572841B61800B3E75C /* DetailViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInteractor.swift; sourceTree = "<group>"; };
+		6CAD6B892847948E00C688F2 /* GenericEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +246,7 @@
 				6C0406192846CEC80012DC32 /* PlatformEntity.swift */,
 				57B2F691284708A100811ED0 /* Endpoint.swift */,
 				6C0DABE828401E4600B3E75C /* Viper.xcdatamodeld */,
+				6CAD6B892847948E00C688F2 /* GenericEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -431,6 +435,7 @@
 				6C0DAC552841B60400B3E75C /* DetailViewPresenter.swift in Sources */,
 				57B2F692284708A100811ED0 /* Endpoint.swift in Sources */,
 				6C0DAC1528401E4800B3E75C /* ViperApp.swift in Sources */,
+				6CAD6B8A2847948E00C688F2 /* GenericEntity.swift in Sources */,
 				6C0406142846CCA20012DC32 /* CompanyEntity.swift in Sources */,
 				6C0DAC3D284063A700B3E75C /* CoreDataEntity.swift in Sources */,
 				6C0406172846CD310012DC32 /* GameEntity.swift in Sources */,
@@ -459,6 +464,7 @@
 				6C0DAC562841B60400B3E75C /* DetailViewPresenter.swift in Sources */,
 				57B2F693284708A100811ED0 /* Endpoint.swift in Sources */,
 				6C0DAC1628401E4800B3E75C /* ViperApp.swift in Sources */,
+				6CAD6B8B2847948E00C688F2 /* GenericEntity.swift in Sources */,
 				6C0406152846CCA20012DC32 /* CompanyEntity.swift in Sources */,
 				6C0DAC3E284063A700B3E75C /* CoreDataEntity.swift in Sources */,
 				6C0406182846CD310012DC32 /* GameEntity.swift in Sources */,

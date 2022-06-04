@@ -12,18 +12,18 @@ import Foundation
 struct PlatformEntity: Codable, StructDecoder {
     static var entityName: String = "Platform"
     
-    let id: Int
+    let id: Int?
     let alternativeName: String?
     let category: Int?
-    let createdAt: Int
-    let name: String
+    let createdAt: Int?
+    let name: String?
     let platformLogo: Int?
-    let slug: String
-    let updatedAt: Int
-    let url: String
-    let versions: [Int]
+    let slug: String?
+    let updatedAt: Int?
+    let url: String?
+    let versions: [Int]?
     let websites: [Int]?
-    let checksum: String
+    let checksum: String?
     let generation, platformFamily: Int?
     let abbreviation, summary: String?
 

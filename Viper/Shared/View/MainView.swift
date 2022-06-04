@@ -25,11 +25,11 @@ struct MainView: View {
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(presenter.endpointNames,id:\.self) { endpoint in
                         NavigationLink {
-                            let interactor = DetailViewInteractor(nome: endpoint)
+                            let interactor = DetailViewInteractor(endpoint: endpoint)
                             let detailViewPresenter = DetailViewPresenter(interactor: interactor)
                             DetailView(presenter: detailViewPresenter,Botaomaluco: detailViewPresenter.endpointName)
                         } label: {
-                            let interactor = EndpointCardInteractor(nome: endpoint)
+                            let interactor = EndpointCardInteractor(endpoint: endpoint)
                             let endpointPresenter = EndpointCardPresenter(interactor: interactor)
                             EndpointCard(presenter: endpointPresenter)
                         }

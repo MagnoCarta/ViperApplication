@@ -11,7 +11,7 @@ import SwiftUI
 class MainViewPresenter: ObservableObject {
     
     private let interactor: MainViewInteractor
-    let endpointNames: [String]
+    let endpointNames: [Endpoint]
     private let router: MainViewRouter = MainViewRouter()
     
     init(interactor: MainViewInteractor) {

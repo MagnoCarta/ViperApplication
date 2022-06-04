@@ -18,13 +18,9 @@ class IGDBWorker {
     
     private init(){}
 
-    var allEndpoints: [String] = []
+    var allEndpoints: [Endpoint] = []
     
-    func loadEndpointInfo<T: Codable>(endpointType: T.Type, completionHandler: @escaping (Any) -> Void ) {
-        print("Interactor receives the request from Presenter to load quotes from the server.")
-        guard let endpoint = Endpoint.getEndpointFromArrayType(type: endpointType) else {
-            return
-        }
+    func loadEndpointInfo(endpoint: Endpoint, completionHandler: @escaping (Any) -> Void ) {
         let endpointString = endpoint.rawValue
         var pluralEndpoint = endpointString.last == "y" ? "\(endpointString[..<endpointString.index(of: "y")!])ies" : "\(endpointString)s"
         pluralEndpoint = (pluralEndpoint.replacingOccurrences(of: " ", with: "_")).lowercased()
@@ -33,10 +29,8 @@ class IGDBWorker {
         request.httpMethod = "POST"
         request.setValue("Bearer be60orsu3ac3r7j9r0ynn1njtbzt5y", forHTTPHeaderField: "Authorization")
         request.setValue("sp8ryigsauyi3uivnmmo3hydbv8fui", forHTTPHeaderField: "Client-ID")
-        if allEndpoints.isEmpty  {
-            allEndpoints = loadEndpoints()
-        }
-        let endpointIndex = (allEndpoints.firstIndex(of: endpointString))!
+        allEndpoints = Endpoint.allCases
+        let endpointIndex = (allEndpoints.firstIndex(of: Endpoint(rawValue:endpointString)!))!
         let field = getFields()[endpointIndex]
         
         let postString = field
@@ -46,16 +40,20 @@ class IGDBWorker {
                 guard let data = data else {
                     fatalError("data FAIL")
                 }
-                
                 let jsonDecoder = JSONDecoder()
+                var json: [StructDecoder]?
                 
-                let json = try jsonDecoder.decode(endpointType, from: data)
+                switch endpoint {
+                case .character:
+                    json = try jsonDecoder.decode([CharacterEntity].self, from: data)
+                case .company:
+                    json = try jsonDecoder.decode([CompanyEntity].self, from: data)
+                case .game:
+                    json = try jsonDecoder.decode([GameEntity].self, from: data)
+                case .platform:
+                    json = try jsonDecoder.decode([PlatformEntity].self, from: data)
+                }
                 
-                
-//                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
-//                    fatalError("JSON FAIL")
-//                }
-//
                 completionHandler(json)
                 
             } catch let error {
@@ -93,8 +91,6 @@ class IGDBWorker {
             allEndpoints =  allEndpoints.map {
                 $0.replacingOccurrences(of: "\n", with: "")
             }
-
-            self.allEndpoints = allEndpoints
             return allEndpoints
             
         } catch let error {
@@ -136,7 +132,6 @@ class IGDBWorker {
 //        }
 //        self.presenter?.getQuoteSuccess(self.quotes![index])
     }
-
 }
 
 extension StringProtocol {

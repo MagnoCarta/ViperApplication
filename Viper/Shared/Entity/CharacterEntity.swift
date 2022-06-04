@@ -12,12 +12,12 @@ import Foundation
 struct CharacterEntity: Codable, StructDecoder {
     static var entityName: String = "Character"
     
-    let id, createdAt: Int
+    let id, createdAt: Int?
     let games: [Int]?
-    let name, slug: String
-    let updatedAt: Int
-    let url: String
-    let checksum: String
+    let name, slug: String?
+    let updatedAt: Int?
+    let url: String?
+    let checksum: String?
     let gender, mugShot, species: Int?
     let characterDescription: String?
 

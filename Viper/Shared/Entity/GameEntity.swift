@@ -16,22 +16,22 @@ import Foundation
 struct GameEntity: Codable, StructDecoder {
     static var entityName: String = "Game"
     
-    let id, category: Int
+    let id, category: Int?
     let cover: Int?
-    let createdAt: Int
+    let createdAt: Int?
     let externalGames: [Int]?
     let firstReleaseDate: Int?
     let gameModes, genres: [Int]?
-    let name: String
+    let name: String?
     let platforms, releaseDates, screenshots, similarGames: [Int]?
-    let slug: String
+    let slug: String?
     let status: Int?
     let summary: String?
     let tags, themes: [Int]?
-    let updatedAt: Int
-    let url: String
+    let updatedAt: Int?
+    let url: String?
     let websites: [Int]?
-    let checksum: String
+    let checksum: String?
     let ageRatings, involvedCompanies, alternativeNames: [Int]?
     let parentGame: Int?
     let aggregatedRating: Double?
