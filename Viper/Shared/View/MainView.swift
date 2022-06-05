@@ -23,15 +23,11 @@ struct MainView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(presenter.endpointNames,id:\.self) { endpoint in
+                    ForEach(presenter.getNames(),id:\.self) { endpoint in
                         NavigationLink {
-                            let interactor = DetailViewInteractor(endpoint: endpoint)
-                            let detailViewPresenter = DetailViewPresenter(interactor: interactor)
-                            DetailView(presenter: detailViewPresenter,Botaomaluco: detailViewPresenter.endpointName)
+                            presenter.moveToDetailView(endpoint: endpoint)
                         } label: {
-                            let interactor = EndpointCardInteractor(endpoint: endpoint)
-                            let endpointPresenter = EndpointCardPresenter(interactor: interactor)
-                            EndpointCard(presenter: endpointPresenter)
+                            presenter.buildViewCells(endpoint: endpoint)
                         }
                         .frame(width: 150, height: 150, alignment: .center)
                     }
@@ -44,11 +40,11 @@ struct MainView: View {
         NavigationView {
             List(presenter.endpointNames,id:\.self) { endpoint in
                         NavigationLink {
-                            let interactor = DetailViewInteractor(nome: endpoint)
+                            let interactor = DetailViewInteractor(endpoint: endpoint)
                             let detailViewPresenter = DetailViewPresenter(interactor: interactor)
                             DetailView(presenter: detailViewPresenter,Botaomaluco: detailViewPresenter.endpointName)
                         } label: {
-                            let interactor = EndpointCardInteractor(nome: endpoint)
+                            let interactor = EndpointCardInteractor(endpoint: endpoint)
                             let endpointPresenter = EndpointCardPresenter(interactor: interactor)
                             EndpointCard(presenter: endpointPresenter)
                         }
@@ -58,4 +54,11 @@ struct MainView: View {
             .navigationTitle("Endpoints")
 #endif
     }
+    
+    func buildCells(endpoint: Endpoint) -> EndpointCard {
+        let interactor = EndpointCardInteractor(endpoint: endpoint)
+        let endpointPresenter = EndpointCardPresenter(interactor: interactor)
+        return EndpointCard(presenter: endpointPresenter)
+    }
+    
 }

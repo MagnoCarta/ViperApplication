@@ -11,12 +11,24 @@ import SwiftUI
 class MainViewPresenter: ObservableObject {
     
     private let interactor: MainViewInteractor
-    let endpointNames: [Endpoint]
     private let router: MainViewRouter = MainViewRouter()
+    private let view: MainView?
     
     init(interactor: MainViewInteractor) {
         self.interactor = interactor
-        self.endpointNames = interactor.nomes
+    }
+    
+    func buildViewCells(endpoint: Endpoint) -> EndpointCard {
+        return view.buildCells(endpoint: endpoint)
+    }
+    
+    
+    func getNames() -> [Endpoint] {
+        self.interactor.nomes
+    }
+    
+    func moveToDetailView(endpoint: Endpoint) -> DetailView {
+        return router.makeDetailView(for: endpoint)
     }
     
 }

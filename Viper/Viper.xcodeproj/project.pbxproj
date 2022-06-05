@@ -31,12 +31,12 @@
 		6C0DAC1A28401E4800B3E75C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DABEC28401E4600B3E75C /* Persistence.swift */; };
 		6C0DAC1B28401E4800B3E75C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C0DABED28401E4800B3E75C /* Assets.xcassets */; };
 		6C0DAC1C28401E4800B3E75C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C0DABED28401E4800B3E75C /* Assets.xcassets */; };
-		6C0DAC32284044C800B3E75C /* IGDBWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC31284044C800B3E75C /* IGDBWorker.swift */; };
-		6C0DAC33284044C800B3E75C /* IGDBWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC31284044C800B3E75C /* IGDBWorker.swift */; };
+		6C0DAC32284044C800B3E75C /* IGDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC31284044C800B3E75C /* IGDBService.swift */; };
+		6C0DAC33284044C800B3E75C /* IGDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC31284044C800B3E75C /* IGDBService.swift */; };
 		6C0DAC3A2840639B00B3E75C /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC392840639B00B3E75C /* MainViewPresenter.swift */; };
 		6C0DAC3B2840639B00B3E75C /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC392840639B00B3E75C /* MainViewPresenter.swift */; };
-		6C0DAC3D284063A700B3E75C /* CoreDataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3C284063A700B3E75C /* CoreDataEntity.swift */; };
-		6C0DAC3E284063A700B3E75C /* CoreDataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3C284063A700B3E75C /* CoreDataEntity.swift */; };
+		6C0DAC3D284063A700B3E75C /* StructDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3C284063A700B3E75C /* StructDecoder.swift */; };
+		6C0DAC3E284063A700B3E75C /* StructDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3C284063A700B3E75C /* StructDecoder.swift */; };
 		6C0DAC40284063B000B3E75C /* MainViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3F284063B000B3E75C /* MainViewRouter.swift */; };
 		6C0DAC41284063B000B3E75C /* MainViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC3F284063B000B3E75C /* MainViewRouter.swift */; };
 		6C0DAC432841921D00B3E75C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC422841921D00B3E75C /* MainView.swift */; };
@@ -57,6 +57,10 @@
 		6C0DAC592841B61800B3E75C /* DetailViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC572841B61800B3E75C /* DetailViewInteractor.swift */; };
 		6CAD6B8A2847948E00C688F2 /* GenericEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B892847948E00C688F2 /* GenericEntity.swift */; };
 		6CAD6B8B2847948E00C688F2 /* GenericEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B892847948E00C688F2 /* GenericEntity.swift */; };
+		6CAD6B8E284D3DFE00C688F2 /* BaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B8D284D3DFE00C688F2 /* BaseProtocols.swift */; };
+		6CAD6B8F284D3DFE00C688F2 /* BaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B8D284D3DFE00C688F2 /* BaseProtocols.swift */; };
+		6CAD6B92284D486200C688F2 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B91284D486200C688F2 /* CoreDataService.swift */; };
+		6CAD6B93284D486200C688F2 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B91284D486200C688F2 /* CoreDataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,9 +100,9 @@
 		6C0DAC0B28401E4800B3E75C /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C0DAC0F28401E4800B3E75C /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		6C0DAC1128401E4800B3E75C /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
-		6C0DAC31284044C800B3E75C /* IGDBWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGDBWorker.swift; sourceTree = "<group>"; };
+		6C0DAC31284044C800B3E75C /* IGDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGDBService.swift; sourceTree = "<group>"; };
 		6C0DAC392840639B00B3E75C /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
-		6C0DAC3C284063A700B3E75C /* CoreDataEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntity.swift; sourceTree = "<group>"; };
+		6C0DAC3C284063A700B3E75C /* StructDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructDecoder.swift; sourceTree = "<group>"; };
 		6C0DAC3F284063B000B3E75C /* MainViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRouter.swift; sourceTree = "<group>"; };
 		6C0DAC422841921D00B3E75C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6C0DAC4528419F5400B3E75C /* EndpointCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointCard.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		6C0DAC542841B60300B3E75C /* DetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresenter.swift; sourceTree = "<group>"; };
 		6C0DAC572841B61800B3E75C /* DetailViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInteractor.swift; sourceTree = "<group>"; };
 		6CAD6B892847948E00C688F2 /* GenericEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericEntity.swift; sourceTree = "<group>"; };
+		6CAD6B8D284D3DFE00C688F2 /* BaseProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocols.swift; sourceTree = "<group>"; };
+		6CAD6B91284D486200C688F2 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +163,7 @@
 		6C0DABE728401E4600B3E75C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				6CAD6B8C284D3DD200C688F2 /* Protocol */,
 				6C0DAC2F2840207300B3E75C /* Presenter */,
 				6C0DAC2E2840206D00B3E75C /* Entity */,
 				6C0DAC2D2840206600B3E75C /* Router */,
@@ -220,7 +227,7 @@
 		6C0DAC2C2840205600B3E75C /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				6C0DAC30284044A100B3E75C /* Worker */,
+				6C0DAC30284044A100B3E75C /* Service */,
 				6C0DAC482841ACA700B3E75C /* MainViewInteractor.swift */,
 				6C0DAC4E2841B45300B3E75C /* EndpointCardInteractor.swift */,
 				6C0DAC572841B61800B3E75C /* DetailViewInteractor.swift */,
@@ -239,7 +246,7 @@
 		6C0DAC2E2840206D00B3E75C /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				6C0DAC3C284063A700B3E75C /* CoreDataEntity.swift */,
+				6CAD6B90284D464000C688F2 /* BaseEntity */,
 				6C0406102846CBFD0012DC32 /* CharacterEntity.swift */,
 				6C0406132846CCA20012DC32 /* CompanyEntity.swift */,
 				6C0406162846CD310012DC32 /* GameEntity.swift */,
@@ -261,12 +268,29 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		6C0DAC30284044A100B3E75C /* Worker */ = {
+		6C0DAC30284044A100B3E75C /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				6C0DAC31284044C800B3E75C /* IGDBWorker.swift */,
+				6C0DAC31284044C800B3E75C /* IGDBService.swift */,
+				6CAD6B91284D486200C688F2 /* CoreDataService.swift */,
 			);
-			path = Worker;
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6CAD6B8C284D3DD200C688F2 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				6CAD6B8D284D3DFE00C688F2 /* BaseProtocols.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		6CAD6B90284D464000C688F2 /* BaseEntity */ = {
+			isa = PBXGroup;
+			children = (
+				6C0DAC3C284063A700B3E75C /* StructDecoder.swift */,
+			);
+			path = BaseEntity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +451,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CAD6B92284D486200C688F2 /* CoreDataService.swift in Sources */,
 				6C0DAC40284063B000B3E75C /* MainViewRouter.swift in Sources */,
 				6C04061A2846CEC80012DC32 /* PlatformEntity.swift in Sources */,
 				6C0DAC3A2840639B00B3E75C /* MainViewPresenter.swift in Sources */,
@@ -437,11 +462,12 @@
 				6C0DAC1528401E4800B3E75C /* ViperApp.swift in Sources */,
 				6CAD6B8A2847948E00C688F2 /* GenericEntity.swift in Sources */,
 				6C0406142846CCA20012DC32 /* CompanyEntity.swift in Sources */,
-				6C0DAC3D284063A700B3E75C /* CoreDataEntity.swift in Sources */,
+				6CAD6B8E284D3DFE00C688F2 /* BaseProtocols.swift in Sources */,
+				6C0DAC3D284063A700B3E75C /* StructDecoder.swift in Sources */,
 				6C0406172846CD310012DC32 /* GameEntity.swift in Sources */,
 				6C0DAC4C2841B43A00B3E75C /* EndpointCardPresenter.swift in Sources */,
 				6C0DAC4F2841B45300B3E75C /* EndpointCardInteractor.swift in Sources */,
-				6C0DAC32284044C800B3E75C /* IGDBWorker.swift in Sources */,
+				6C0DAC32284044C800B3E75C /* IGDBService.swift in Sources */,
 				6C0DAC432841921D00B3E75C /* MainView.swift in Sources */,
 				6C0DAC492841ACA700B3E75C /* MainViewInteractor.swift in Sources */,
 				6C0DAC1928401E4800B3E75C /* Persistence.swift in Sources */,
@@ -456,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CAD6B93284D486200C688F2 /* CoreDataService.swift in Sources */,
 				6C0DAC41284063B000B3E75C /* MainViewRouter.swift in Sources */,
 				6C04061B2846CEC80012DC32 /* PlatformEntity.swift in Sources */,
 				6C0DAC3B2840639B00B3E75C /* MainViewPresenter.swift in Sources */,
@@ -466,11 +493,12 @@
 				6C0DAC1628401E4800B3E75C /* ViperApp.swift in Sources */,
 				6CAD6B8B2847948E00C688F2 /* GenericEntity.swift in Sources */,
 				6C0406152846CCA20012DC32 /* CompanyEntity.swift in Sources */,
-				6C0DAC3E284063A700B3E75C /* CoreDataEntity.swift in Sources */,
+				6CAD6B8F284D3DFE00C688F2 /* BaseProtocols.swift in Sources */,
+				6C0DAC3E284063A700B3E75C /* StructDecoder.swift in Sources */,
 				6C0406182846CD310012DC32 /* GameEntity.swift in Sources */,
 				6C0DAC4D2841B43A00B3E75C /* EndpointCardPresenter.swift in Sources */,
 				6C0DAC502841B45300B3E75C /* EndpointCardInteractor.swift in Sources */,
-				6C0DAC33284044C800B3E75C /* IGDBWorker.swift in Sources */,
+				6C0DAC33284044C800B3E75C /* IGDBService.swift in Sources */,
 				6C0DAC442841921D00B3E75C /* MainView.swift in Sources */,
 				6C0DAC4A2841ACA700B3E75C /* MainViewInteractor.swift in Sources */,
 				6C0DAC1A28401E4800B3E75C /* Persistence.swift in Sources */,

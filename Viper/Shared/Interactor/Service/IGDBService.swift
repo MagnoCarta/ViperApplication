@@ -1,5 +1,5 @@
 //
-//  IGDBWorker.swift
+//  IGDBService.swift
 //  Viper
 //
 //  Created by Gilberto vieira on 26/05/22.
@@ -9,12 +9,12 @@ import Foundation
 
 //https://api.igdb.com/v4/genres
 
-class IGDBWorker {
+class IGDBService {
     
     // MARK: Properties
     //weak var presenter: InteractorToPresenterQuotesProtocol?
     
-    static let worker = IGDBWorker()
+    static let worker = IGDBService()
     
     private init(){}
 
