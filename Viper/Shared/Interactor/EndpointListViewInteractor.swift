@@ -6,14 +6,41 @@
 //
 
 import Foundation
+import SwiftUI
 
 class EndpointListViewInteractor {
     
     let endpoint: Endpoint
-    var results: [StructDecoder] = []
+    var names: [String?] = []
+    var urlImages: [String?] = []
+    var presenter: EndpointListViewPresenter?
     
     init(endpoint: Endpoint) {
         self.endpoint = endpoint
+    }
+    
+    func fetchNames() {
+        IGDBService.service.loadEndpointSummary(endpoint: endpoint, completion: {result in
+            
+            switch self.endpoint {
+            case .character:
+                print((result as! [CharacterEntity]).first?.name)
+            case .company:
+                print((result as! [CompanyEntity]).first?.name)
+            case .game:
+                print((result as! [GameEntity]).first?.name)
+            case .platform:
+                print((result as! [PlatformEntity]).first?.name)
+            }
+        })
+        
+        presenter?.hasFetchedSummary()
+        
+    }
+    
+    func getUrlImages() {
+        
+        
     }
     
 }

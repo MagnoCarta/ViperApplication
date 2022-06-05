@@ -20,22 +20,53 @@ class IGDBService {
 
     var allEndpoints: [Endpoint] = []
     
-    func loadEndpointInfo(endpoint: Endpoint, completionHandler: @escaping (Any) -> Void ) {
+    func getUrlForEndpoint(endpoint: Endpoint) -> URL? {
         let endpointString = endpoint.rawValue
         var pluralEndpoint = endpointString.last == "y" ? "\(endpointString[..<endpointString.index(of: "y")!])ies" : "\(endpointString)s"
         pluralEndpoint = (pluralEndpoint.replacingOccurrences(of: " ", with: "_")).lowercased()
-        guard let url = URL(string: "https://api.igdb.com/v4/\(pluralEndpoint)") else { return  }
+        return URL(string: "https://api.igdb.com/v4/\(pluralEndpoint)")
+    }
+    
+    func getRequestForURL(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer be60orsu3ac3r7j9r0ynn1njtbzt5y", forHTTPHeaderField: "Authorization")
         request.setValue("sp8ryigsauyi3uivnmmo3hydbv8fui", forHTTPHeaderField: "Client-ID")
+        return request
+    }
+    
+    func getFieldsForEndpoint(endpoint: Endpoint) -> String {
         allEndpoints = Endpoint.allCases
-        let endpointIndex = (allEndpoints.firstIndex(of: Endpoint(rawValue:endpointString)!))!
-        let field = getFields()[endpointIndex]
-        
-        let postString = field
+        let endpointIndex = (allEndpoints.firstIndex(of: Endpoint(rawValue:endpoint.rawValue)!))!
+        return getFields()[endpointIndex]
+    }
+    
+    func loadEndpointFullInfo(endpoint: Endpoint, completionHandler: @escaping (Any) -> Void ) {
+        let fields = getFieldsForEndpoint(endpoint: endpoint)
+        loadEndpointsWithFields(endpoint: endpoint,fields: fields, completion: completionHandler)
+    }
+    
+    func loadEndpointSummary(endpoint: Endpoint,completion: @escaping (Any) -> Void ) {
+        var fields = "fields name,"
+        switch endpoint {
+        case .character:
+            fields = fields + "mug_shot;"
+        case .company:
+            fields = fields + "logo;"
+        case .game:
+            fields = fields + "cover;"
+        case .platform:
+            fields = fields + "platform_logo;"
+        }
+         loadEndpointsWithFields(endpoint: endpoint, fields: fields, completion: completion)
+    }
+    
+    func loadEndpointsWithFields(endpoint: Endpoint,fields: String, completion: @escaping (Any) -> Void ) {
+        guard let url = getUrlForEndpoint(endpoint: endpoint) else { return }
+        var request = getRequestForURL(url: url)
+        let postString = fields
         request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { [weak self] (data, response, error) in
             do {
                 guard let data = data else {
                     fatalError("data FAIL")
@@ -54,10 +85,8 @@ class IGDBService {
                     json = try jsonDecoder.decode([PlatformEntity].self, from: data)
                 }
                 
-                completionHandler(json)
+                completion(json)
                 
-            } catch let error {
-                print(error)
             } catch let error {
                 print(error)
             }

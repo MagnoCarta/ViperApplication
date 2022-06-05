@@ -10,7 +10,6 @@ import SwiftUI
 
 class MainViewInteractor {
     
-    let service: IGDBService = IGDBService.service
     let nomes: [Endpoint]
     
     init(nomes: [Endpoint]) {
