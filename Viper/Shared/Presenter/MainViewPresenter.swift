@@ -21,8 +21,8 @@ class MainViewPresenter: ObservableObject {
         self.interactor.nomes
     }
     
-    func moveToDetailView(endpoint: Endpoint) -> DetailView {
-        return router.makeDetailView(for: endpoint)
+    func moveToEndpointListView(endpoint: Endpoint) -> EndpointListView {
+        return router.makeEndpointListView(for: endpoint)
     }
     
 }

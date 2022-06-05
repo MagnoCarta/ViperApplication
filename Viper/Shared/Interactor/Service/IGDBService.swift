@@ -14,7 +14,7 @@ class IGDBService {
     // MARK: Properties
     //weak var presenter: InteractorToPresenterQuotesProtocol?
     
-    static let worker = IGDBService()
+    static let service = IGDBService()
     
     private init(){}
 

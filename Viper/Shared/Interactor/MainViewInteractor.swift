@@ -10,9 +10,8 @@ import SwiftUI
 
 class MainViewInteractor {
     
-    let worker: IGDBService = IGDBService.worker
+    let service: IGDBService = IGDBService.service
     let nomes: [Endpoint]
-    //let presenter:
     
     init(nomes: [Endpoint]) {
         self.nomes = nomes

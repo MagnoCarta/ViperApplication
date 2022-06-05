@@ -10,10 +10,10 @@ import Foundation
 import SwiftUI
 
 class MainViewRouter {
-  func makeDetailView(for endpointName: Endpoint) -> DetailView {
-      let interactor = DetailViewInteractor(endpoint: endpointName)
-      let detailViewPresenter = DetailViewPresenter(interactor: interactor)
-      return DetailView(presenter: detailViewPresenter)
+  func makeEndpointListView(for endpointName: Endpoint) -> EndpointListView {
+      let interactor = EndpointListViewInteractor(endpoint: endpointName)
+      let endpointListViewPresenter = EndpointListViewPresenter(interactor: interactor)
+      return EndpointListView(presenter: endpointListViewPresenter)
   }
 }
 
