@@ -27,7 +27,7 @@ struct MainView: View {
                         NavigationLink {
                             presenter.moveToDetailView(endpoint: endpoint)
                         } label: {
-                            presenter.buildViewCells(endpoint: endpoint)
+                            buildCard(endpoint: endpoint)
                         }
                         .frame(width: 150, height: 150, alignment: .center)
                     }
@@ -38,15 +38,11 @@ struct MainView: View {
         }
 #elseif os(macOS)
         NavigationView {
-            List(presenter.endpointNames,id:\.self) { endpoint in
+            List(presenter.getNames(),id:\.self) { endpoint in
                         NavigationLink {
-                            let interactor = DetailViewInteractor(endpoint: endpoint)
-                            let detailViewPresenter = DetailViewPresenter(interactor: interactor)
-                            DetailView(presenter: detailViewPresenter,Botaomaluco: detailViewPresenter.endpointName)
+                            presenter.moveToDetailView(endpoint: endpoint)
                         } label: {
-                            let interactor = EndpointCardInteractor(endpoint: endpoint)
-                            let endpointPresenter = EndpointCardPresenter(interactor: interactor)
-                            EndpointCard(presenter: endpointPresenter)
+                            buildCard(endpoint: endpoint)
                         }
                         .frame(width: 150, height: 150, alignment: .center)
                     }
@@ -55,7 +51,7 @@ struct MainView: View {
 #endif
     }
     
-    func buildCells(endpoint: Endpoint) -> EndpointCard {
+    func buildCard(endpoint: Endpoint) -> EndpointCard {
         let interactor = EndpointCardInteractor(endpoint: endpoint)
         let endpointPresenter = EndpointCardPresenter(interactor: interactor)
         return EndpointCard(presenter: endpointPresenter)

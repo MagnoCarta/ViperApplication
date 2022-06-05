@@ -12,16 +12,10 @@ class MainViewPresenter: ObservableObject {
     
     private let interactor: MainViewInteractor
     private let router: MainViewRouter = MainViewRouter()
-    private let view: MainView?
     
     init(interactor: MainViewInteractor) {
         self.interactor = interactor
     }
-    
-    func buildViewCells(endpoint: Endpoint) -> EndpointCard {
-        return view.buildCells(endpoint: endpoint)
-    }
-    
     
     func getNames() -> [Endpoint] {
         self.interactor.nomes
