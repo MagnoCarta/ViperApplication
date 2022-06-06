@@ -13,33 +13,31 @@ class EndpointListViewInteractor {
     let endpoint: Endpoint
     var names: [String?] = []
     var urlImages: [String?] = []
-    var presenter: EndpointListViewPresenter?
+    weak var presenter: EndpointListViewPresenter?
     
     init(endpoint: Endpoint) {
         self.endpoint = endpoint
     }
     
-    func fetchNames() {
+    func fetchSummary() {
         IGDBService.service.loadEndpointSummary(endpoint: endpoint, completion: {result in
-            
+            var summary: [(String?, Int?)]
             switch self.endpoint {
             case .character:
-                print((result as! [CharacterEntity]).first?.name)
+                let characters = result as! [CharacterEntity]
+                summary = characters.map({ ($0.name, $0.mugShot) })
             case .company:
-                print((result as! [CompanyEntity]).first?.name)
+                let companies = result as! [CompanyEntity]
+                summary = companies.map({ ($0.name, $0.logo) })
             case .game:
-                print((result as! [GameEntity]).first?.name)
+                let games = result as! [GameEntity]
+                summary = games.map({ ($0.name, $0.cover) })
             case .platform:
-                print((result as! [PlatformEntity]).first?.name)
+                let platforms = result as! [PlatformEntity]
+                summary = platforms.map({ ($0.name, $0.platformLogo) })
             }
+            self.presenter?.hasFetchedSummary(summary: summary)
         })
-        
-        presenter?.hasFetchedSummary()
-        
-    }
-    
-    func getUrlImages() {
-        
         
     }
     

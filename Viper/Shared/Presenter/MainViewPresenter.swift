@@ -18,7 +18,7 @@ class MainViewPresenter: ObservableObject {
     }
     
     func getNames() -> [Endpoint] {
-        self.interactor.nomes
+        self.interactor.endpointNames
     }
     
     func moveToEndpointListView(endpoint: Endpoint) -> EndpointListView {

@@ -13,14 +13,19 @@ class EndpointListViewPresenter: ObservableObject {
     let endpointName: Endpoint
     var view: EndpointListView?
     
-    
     init(interactor: EndpointListViewInteractor) {
         self.interactor = interactor
         self.endpointName = interactor.endpoint
+        
+        interactor.presenter = self
     }
     
-    func hasFetchedSummary() {
-        
+    func fetchSummary() {
+        interactor.fetchSummary()
+    }
+    
+    func hasFetchedSummary(summary: [(String?, Int?)]) {
+        print(summary)
     }
     
     

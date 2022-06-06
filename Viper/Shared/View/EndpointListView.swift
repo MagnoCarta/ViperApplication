@@ -13,7 +13,8 @@ struct EndpointListView: View {
     @ObservedObject var presenter: EndpointListViewPresenter
     
     var body: some View {
-        Text("")
+        presenter.fetchSummary()
+        return Text("")
     }
     
 }

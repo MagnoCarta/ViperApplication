@@ -26,6 +26,9 @@ struct CompanyEntity: Codable, StructDecoder {
     let checksum: String?
     let published: [Int]?
     let parent, changeDate, changedCompanyID: Int?
+    
+    // Custom Properties
+    let logoURL: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -40,5 +43,8 @@ struct CompanyEntity: Codable, StructDecoder {
         case url, websites, checksum, published, parent
         case changeDate = "change_date"
         case changedCompanyID = "changed_company_id"
+        
+        // Custom Properties
+        case logoURL
     }
 }

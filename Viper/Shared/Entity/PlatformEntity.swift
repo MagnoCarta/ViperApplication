@@ -26,6 +26,9 @@ struct PlatformEntity: Codable, StructDecoder {
     let checksum: String?
     let generation, platformFamily: Int?
     let abbreviation, summary: String?
+    
+    // Custom Properties
+    let platformLogoURL: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -39,5 +42,8 @@ struct PlatformEntity: Codable, StructDecoder {
         case url, versions, websites, checksum, generation
         case platformFamily = "platform_family"
         case abbreviation, summary
+        
+        // Custom Properties
+        case platformLogoURL
     }
 }

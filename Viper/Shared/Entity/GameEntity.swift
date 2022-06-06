@@ -49,6 +49,9 @@ struct GameEntity: Codable, StructDecoder {
     let versionTitle: String?
     let hypes, follows: Int?
     let multiplayerModes, dlcs, standaloneExpansions, remasters: [Int]?
+    
+    // Custom Properties
+    let coverURL: String?
 
     enum CodingKeys: String, CodingKey {
         case id, category, cover
@@ -83,5 +86,8 @@ struct GameEntity: Codable, StructDecoder {
         case dlcs
         case standaloneExpansions = "standalone_expansions"
         case remasters
+        
+        // Custom Properties
+        case coverURL
     }
 }

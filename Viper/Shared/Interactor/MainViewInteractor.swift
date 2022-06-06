@@ -10,10 +10,10 @@ import SwiftUI
 
 class MainViewInteractor {
     
-    let nomes: [Endpoint]
+    let endpointNames: [Endpoint]
     
-    init(nomes: [Endpoint]) {
-        self.nomes = nomes
+    init(endpointNames: [Endpoint]) {
+        self.endpointNames = endpointNames
     }
     
 }

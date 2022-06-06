@@ -47,17 +47,7 @@ class IGDBService {
     }
     
     func loadEndpointSummary(endpoint: Endpoint,completion: @escaping (Any) -> Void ) {
-        var fields = "fields name,"
-        switch endpoint {
-        case .character:
-            fields = fields + "mug_shot;"
-        case .company:
-            fields = fields + "logo;"
-        case .game:
-            fields = fields + "cover;"
-        case .platform:
-            fields = fields + "platform_logo;"
-        }
+        let fields = "fields name, \(endpoint.getImageField());"
          loadEndpointsWithFields(endpoint: endpoint, fields: fields, completion: completion)
     }
     
@@ -66,7 +56,7 @@ class IGDBService {
         var request = getRequestForURL(url: url)
         let postString = fields
         request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { [weak self] (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             do {
                 guard let data = data else {
                     fatalError("data FAIL")

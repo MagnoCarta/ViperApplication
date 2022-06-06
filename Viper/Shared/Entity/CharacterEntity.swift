@@ -20,6 +20,9 @@ struct CharacterEntity: Codable, StructDecoder {
     let checksum: String?
     let gender, mugShot, species: Int?
     let characterDescription: String?
+    
+    // Custom Properties
+    let mugShotURL: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -30,5 +33,8 @@ struct CharacterEntity: Codable, StructDecoder {
         case mugShot = "mug_shot"
         case species
         case characterDescription = "description"
+        
+        // Custom Properties
+        case mugShotURL
     }
 }
