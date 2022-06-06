@@ -13,6 +13,7 @@ class EndpointCardPresenter: ObservableObject {
     
     private let interactor: EndpointCardInteractor
     let endpointName: Endpoint
+    var imageURL: Int?
     //private let router = EndpointRouter()
     
     init(interactor: EndpointCardInteractor) {

@@ -22,6 +22,7 @@ class EndpointListViewInteractor {
     func fetchSummary() {
         IGDBService.service.loadEndpointSummary(endpoint: endpoint, completion: {result in
             var summary: [(String?, Int?)]
+            var trueSummary: [SummaryEntity] = []
             switch self.endpoint {
             case .character:
                 let characters = result as! [CharacterEntity]
@@ -36,7 +37,17 @@ class EndpointListViewInteractor {
                 let platforms = result as! [PlatformEntity]
                 summary = platforms.map({ ($0.name, $0.platformLogo) })
             }
-            self.presenter?.hasFetchedSummary(summary: summary)
+            summary.forEach {summary in
+                trueSummary.append(SummaryEntity(originalEntity: self.endpoint.imageType.rawValue, name: summary.0, imageURL: nil))
+            }
+            IGDBService.service.loadEndpointSummary(endpoint: self.endpoint, completion: {trueResult in
+                var index = 0
+                (trueResult as! [SummaryEntity]).forEach { actualSummary in
+                    trueSummary[index].imageURL = actualSummary.imageURL
+                    index += 1
+                }
+            })
+            self.presenter?.hasFetchedSummary(summary: trueSummary)
         })
         
     }

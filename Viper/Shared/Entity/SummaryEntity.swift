@@ -12,5 +12,5 @@ struct SummaryEntity: Codable, StructDecoder {
     
     let originalEntity: String?
     let name: String?
-    let imageURL: String?
+    var imageURL: String?
 }

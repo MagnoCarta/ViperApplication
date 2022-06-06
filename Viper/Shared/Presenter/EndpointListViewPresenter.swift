@@ -24,7 +24,7 @@ class EndpointListViewPresenter: ObservableObject {
         interactor.fetchSummary()
     }
     
-    func hasFetchedSummary(summary: [(String?, Int?)]) {
+    func hasFetchedSummary(summary: [SummaryEntity]) {
         print(summary)
     }
     

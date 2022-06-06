@@ -19,6 +19,7 @@ class IGDBService {
     private init(){}
 
     var allEndpoints: [Endpoint] = []
+    var fetchingImages = false
     
     func getUrlForEndpoint(endpoint: Endpoint) -> URL? {
         let endpointString = endpoint.rawValue
@@ -47,8 +48,13 @@ class IGDBService {
     }
     
     func loadEndpointSummary(endpoint: Endpoint,completion: @escaping (Any) -> Void ) {
-        let fields = "fields name, \(endpoint.getImageField());"
-         loadEndpointsWithFields(endpoint: endpoint, fields: fields, completion: completion)
+        var fields = ""
+        if !fetchingImages {
+             fields = "fields name, \(endpoint.getImageField()); limit 50;"
+        } else {
+             fields = "fields \(endpoint.getImageField()); limit 50;"
+        }
+        loadEndpointsWithFields(endpoint: endpoint, fields: fields, completion: completion)
     }
     
     func loadEndpointsWithFields(endpoint: Endpoint,fields: String, completion: @escaping (Any) -> Void ) {
@@ -63,18 +69,21 @@ class IGDBService {
                 }
                 let jsonDecoder = JSONDecoder()
                 var json: [StructDecoder]?
-                
-                switch endpoint {
-                case .character:
-                    json = try jsonDecoder.decode([CharacterEntity].self, from: data)
-                case .company:
-                    json = try jsonDecoder.decode([CompanyEntity].self, from: data)
-                case .game:
-                    json = try jsonDecoder.decode([GameEntity].self, from: data)
-                case .platform:
-                    json = try jsonDecoder.decode([PlatformEntity].self, from: data)
+                if !self.fetchingImages {
+                    switch endpoint {
+                    case .character:
+                        json = try jsonDecoder.decode([CharacterEntity].self, from: data)
+                    case .company:
+                        json = try jsonDecoder.decode([CompanyEntity].self, from: data)
+                    case .game:
+                        json = try jsonDecoder.decode([GameEntity].self, from: data)
+                    case .platform:
+                        json = try jsonDecoder.decode([PlatformEntity].self, from: data)
+                    }
+                }else {
+                    json = try jsonDecoder.decode([SummaryEntity].self, from: data)
                 }
-                
+                self.fetchingImages = !self.fetchingImages
                 completion(json)
                 
             } catch let error {
