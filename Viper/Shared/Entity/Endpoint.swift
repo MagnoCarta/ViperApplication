@@ -23,16 +23,16 @@ enum Endpoint: String, CaseIterable {
             return "platform_logo"
         }
     }
-    var imageType: EndpointImage {
+    var imageType: (EndpointImage,String) {
         switch self {
         case .character:
-            return EndpointImage.mugshot
+            return (EndpointImage.mugshot,"mug_shot")
         case .company:
-            return EndpointImage.logo
+            return (EndpointImage.logo,"logo")
         case .game:
-            return EndpointImage.cover
+            return (EndpointImage.cover,"cover")
         case .platform:
-            return EndpointImage.platformLogo
+            return (EndpointImage.platformLogo,"platform_logo")
         }
     }
     
@@ -43,5 +43,5 @@ enum Endpoint: String, CaseIterable {
 }
 
 enum EndpointImage: String {
-    case mugshot = "mug_shot",logo,cover,platformLogo = "platform_logo"
+    case mugshot = "character_mug_shot",logo = "company_logo",cover,platformLogo = "platform_logo"
 }

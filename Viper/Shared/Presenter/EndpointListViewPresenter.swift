@@ -25,7 +25,7 @@ class EndpointListViewPresenter: ObservableObject {
     }
     
     func hasFetchedSummary(summary: [SummaryEntity]) {
-        print(summary)
+        view?.summary = summary
     }
     
     

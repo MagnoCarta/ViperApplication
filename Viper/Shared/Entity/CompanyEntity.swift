@@ -45,6 +45,6 @@ struct CompanyEntity: Codable, StructDecoder {
         case changedCompanyID = "changed_company_id"
         
         // Custom Properties
-        case logoURL
+        case logoURL = "compay_logo"
     }
 }

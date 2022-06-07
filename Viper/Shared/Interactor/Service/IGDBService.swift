@@ -21,8 +21,11 @@ class IGDBService {
     var allEndpoints: [Endpoint] = []
     var fetchingImages = false
     
-    func getUrlForEndpoint(endpoint: Endpoint) -> URL? {
-        let endpointString = endpoint.rawValue
+    func getUrlForEndpoint(endpoint: Endpoint,isFetchingImage: Bool) -> URL? {
+        var endpointString = endpoint.rawValue
+        if isFetchingImage {
+            endpointString = endpoint.imageType.0.rawValue
+        }
         var pluralEndpoint = endpointString.last == "y" ? "\(endpointString[..<endpointString.index(of: "y")!])ies" : "\(endpointString)s"
         pluralEndpoint = (pluralEndpoint.replacingOccurrences(of: " ", with: "_")).lowercased()
         return URL(string: "https://api.igdb.com/v4/\(pluralEndpoint)")
@@ -48,51 +51,99 @@ class IGDBService {
     }
     
     func loadEndpointSummary(endpoint: Endpoint,completion: @escaping (Any) -> Void ) {
-        var fields = ""
-        if !fetchingImages {
-             fields = "fields name, \(endpoint.getImageField()); limit 50;"
-        } else {
-             fields = "fields \(endpoint.getImageField()); limit 50;"
-        }
-        loadEndpointsWithFields(endpoint: endpoint, fields: fields, completion: completion)
+        let fieldsEntity = "fields name, \(endpoint.imageType.1); limit 50;"
+        loadEndpointsWithFields(endpoint: endpoint, fields: fieldsEntity, completion: completion)
     }
     
     func loadEndpointsWithFields(endpoint: Endpoint,fields: String, completion: @escaping (Any) -> Void ) {
-        guard let url = getUrlForEndpoint(endpoint: endpoint) else { return }
+        
+        guard let url = getUrlForEndpoint(endpoint: endpoint, isFetchingImage: false) else { return }
         var request = getRequestForURL(url: url)
         let postString = fields
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-            do {
-                guard let data = data else {
-                    fatalError("data FAIL")
-                }
-                let jsonDecoder = JSONDecoder()
-                var json: [StructDecoder]?
-                if !self.fetchingImages {
-                    switch endpoint {
-                    case .character:
-                        json = try jsonDecoder.decode([CharacterEntity].self, from: data)
-                    case .company:
-                        json = try jsonDecoder.decode([CompanyEntity].self, from: data)
-                    case .game:
-                        json = try jsonDecoder.decode([GameEntity].self, from: data)
-                    case .platform:
-                        json = try jsonDecoder.decode([PlatformEntity].self, from: data)
-                    }
-                }else {
-                    json = try jsonDecoder.decode([SummaryEntity].self, from: data)
-                }
-                self.fetchingImages = !self.fetchingImages
-                completion(json)
-                
-            } catch let error {
-                print(error)
-            }
+
+                guard let data = data else { fatalError("data FAIL") }
+                let json: [StructDecoder] = self.loadJsonDecoded(endpoint: endpoint, data: data)
+                var mixedJson: [StructDecoder] = []
             
+                self.loadImagesURL(endpoint: endpoint, json: json, fields: "fields url; limit 50;", completion: { results in
+                    var index = 0
+                    results.forEach({ result in
+                        mixedJson.append(self.insertURL(endpoint: endpoint, noURL: json[index], withURL: results[index]))
+                        index += 1
+                    })
+                    
+                    completion(mixedJson)
+                })
+                
         })
         
         task.resume()
+    }
+    
+    func loadJsonDecoded(endpoint: Endpoint,data: Data) -> [StructDecoder] {
+        let jsonDecoder = JSONDecoder()
+        var json: [StructDecoder]?
+            switch endpoint {
+            case .character:
+                json = try? jsonDecoder.decode([CharacterEntity].self, from: data)
+            case .company:
+                json = try? jsonDecoder.decode([CompanyEntity].self, from: data)
+            case .game:
+                json = try? jsonDecoder.decode([GameEntity].self, from: data)
+            case .platform:
+                json = try? jsonDecoder.decode([PlatformEntity].self, from: data)
+            }
+        
+        guard let json = json else { fatalError("Fail to decode JSON") }
+
+        return json
+    }
+    
+    func loadImagesURL(endpoint: Endpoint,json: [StructDecoder],fields: String,completion: @escaping ([StructDecoder]) -> Void) {
+        
+        guard let url = getUrlForEndpoint(endpoint: endpoint, isFetchingImage: true) else { return }
+        var request = getRequestForURL(url: url)
+        let postString = fields
+        request.httpBody = postString.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+            
+                guard let data = data else { fatalError("data FAIL") }
+            
+                let json: [StructDecoder] = self.loadJsonDecoded(endpoint: endpoint, data: data)
+            
+                completion(json)
+        })
+        
+        task.resume()
+        
+    }
+    
+    func insertURL(endpoint: Endpoint,noURL: StructDecoder,withURL: StructDecoder) -> StructDecoder {
+        
+        var inserted: StructDecoder
+        switch endpoint {
+        case .character:
+            let noURL = noURL as! CharacterEntity
+            let withURL = withURL as! CharacterEntity
+            inserted = CharacterEntity(id: noURL.id, createdAt: noURL.createdAt, games: noURL.games, name: noURL.name, slug: noURL.slug, updatedAt: noURL.updatedAt, url: noURL.url, checksum: noURL.checksum, gender: noURL.gender, mugShot: noURL.mugShot, species: noURL.species, characterDescription: noURL.characterDescription, mugShotURL: withURL.url)
+        case .company:
+            let noURL = noURL as! CompanyEntity
+            let withURL = withURL as! CompanyEntity
+            inserted = CompanyEntity(id: noURL.id, changeDateCategory: noURL.changeDateCategory, country: noURL.country, createdAt: noURL.createdAt, companyDescription: noURL.companyDescription, developed: noURL.developed, logo: noURL.logo, name: noURL.name, slug: noURL.slug, startDate: noURL.startDate, startDateCategory: noURL.startDateCategory, updatedAt: noURL.updatedAt, url: noURL.url, websites: noURL.websites, checksum: noURL.checksum, published: noURL.published, parent: noURL.parent, changeDate: noURL.changeDate, changedCompanyID: noURL.changedCompanyID, logoURL: withURL.url )
+        case .game:
+            let noURL = noURL as! GameEntity
+            let withURL = withURL as! GameEntity
+            inserted = GameEntity(id: noURL.id, category: noURL.category, cover: noURL.cover, createdAt: noURL.createdAt, externalGames: noURL.externalGames, firstReleaseDate: noURL.firstReleaseDate, gameModes: noURL.gameModes, genres: noURL.genres, name: noURL.name, platforms: noURL.platforms, releaseDates: noURL.releaseDates, screenshots: noURL.screenshots, similarGames: noURL.similarGames, slug: noURL.slug, status: noURL.status, summary: noURL.summary, tags: noURL.tags, themes: noURL.themes, updatedAt: noURL.updatedAt, url: noURL.url, websites: noURL.websites, checksum: noURL.checksum, ageRatings: noURL.ageRatings, involvedCompanies: noURL.involvedCompanies, alternativeNames: noURL.alternativeNames, parentGame: noURL.parentGame, aggregatedRating: noURL.aggregatedRating, aggregatedRatingCount: noURL.aggregatedRatingCount, bundles: noURL.bundles, collection: noURL.collection, franchise: noURL.franchise, franchises: noURL.franchises, keywords: noURL.keywords, rating: noURL.rating, ratingCount: noURL.ratingCount, totalRating: noURL.totalRating, totalRatingCount: noURL.totalRatingCount, gameEngines: noURL.gameEngines, playerPerspectives: noURL.playerPerspectives, artworks: noURL.artworks, videos: noURL.videos, storyline: noURL.storyline, versionParent: noURL.versionParent, versionTitle: noURL.versionTitle, hypes: noURL.hypes, follows: noURL.follows, multiplayerModes: noURL.multiplayerModes, dlcs: noURL.dlcs, standaloneExpansions: noURL.standaloneExpansions, remasters: noURL.remasters, coverURL: withURL.url)
+        case .platform:
+            let noURL = noURL as! PlatformEntity
+            let withURL = withURL as! PlatformEntity
+            inserted = PlatformEntity(id: noURL.id, alternativeName: noURL.alternativeName, category: noURL.category, createdAt: noURL.createdAt, name: noURL.name, platformLogo: noURL.platformLogo, slug: noURL.slug, updatedAt: noURL.updatedAt, url: noURL.url, versions: noURL.versions, websites: noURL.websites, checksum: noURL.checksum, generation: noURL.generation, platformFamily: noURL.platformFamily, abbreviation: noURL.abbreviation, summary: noURL.summary, platformLogoURL: withURL.url)
+        }
+        
+        return inserted
+        
     }
     
     func loadEndpoints() -> [String] {

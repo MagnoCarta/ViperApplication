@@ -20,36 +20,36 @@ class EndpointListViewInteractor {
     }
     
     func fetchSummary() {
-        IGDBService.service.loadEndpointSummary(endpoint: endpoint, completion: {result in
-            var summary: [(String?, Int?)]
-            var trueSummary: [SummaryEntity] = []
+        var summary: [(String?, Int?)] = []
+        var trueSummary: [SummaryEntity] = []
+        IGDBService.service.loadEndpointSummary(endpoint: endpoint, completion: { result in
+            
             switch self.endpoint {
             case .character:
                 let characters = result as! [CharacterEntity]
-                summary = characters.map({ ($0.name, $0.mugShot) })
+                trueSummary = characters.map({character in
+                    SummaryEntity(originalEntity: self.endpoint.rawValue, name: character.name, imageURL: character.mugShotURL)
+                })
             case .company:
                 let companies = result as! [CompanyEntity]
-                summary = companies.map({ ($0.name, $0.logo) })
+                trueSummary = companies.map({company in
+                    SummaryEntity(originalEntity: self.endpoint.rawValue, name: company.name, imageURL: company.logoURL)
+                })
             case .game:
                 let games = result as! [GameEntity]
-                summary = games.map({ ($0.name, $0.cover) })
+                trueSummary = games.map({game in
+                    SummaryEntity(originalEntity: self.endpoint.rawValue, name: game.name, imageURL: game.coverURL)
+                })
             case .platform:
                 let platforms = result as! [PlatformEntity]
-                summary = platforms.map({ ($0.name, $0.platformLogo) })
+                trueSummary = platforms.map({platform in
+                    SummaryEntity(originalEntity: self.endpoint.rawValue, name: platform.name, imageURL: platform.platformLogoURL)
+                })
             }
-            summary.forEach {summary in
-                trueSummary.append(SummaryEntity(originalEntity: self.endpoint.imageType.rawValue, name: summary.0, imageURL: nil))
-            }
-            IGDBService.service.loadEndpointSummary(endpoint: self.endpoint, completion: {trueResult in
-                var index = 0
-                (trueResult as! [SummaryEntity]).forEach { actualSummary in
-                    trueSummary[index].imageURL = actualSummary.imageURL
-                    index += 1
-                }
-            })
+            
             self.presenter?.hasFetchedSummary(summary: trueSummary)
         })
-        
+
     }
     
 }
