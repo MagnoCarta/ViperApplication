@@ -47,7 +47,7 @@ class EndpointListViewInteractor {
                 })
             }
             
-            self.presenter?.hasFetchedSummary(summary: trueSummary)
+            self.presenter?.hasFetchedSummary(summaries: trueSummary)
         })
 
     }

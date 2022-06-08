@@ -16,16 +16,18 @@ struct EndpointListView: View {
     ]
     let height: CGFloat = 150
     @ObservedObject var presenter: EndpointListViewPresenter
-    @State var summary: [SummaryEntity] = []
+    @State var summaries: [SummaryEntity] = []
     
     var body: some View {
         presenter.view = self
         presenter.fetchSummary()
             return ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(summary,id:\.self) { summary in
+                    ForEach(summaries,id:\.self) { summary in
                         NavigationLink {
-//                            presenter.moveToEndpointListView(endpoint: endpoint)
+                            if let summaryName = summary.name {
+                                presenter.moveToDetailView(name: summaryName)
+                            }
                         } label: {
                             buildCard(endpoint: presenter.endpointName, name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")
                         }

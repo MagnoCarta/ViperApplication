@@ -24,7 +24,7 @@ class EndpointCardPresenter: ObservableObject {
         interactor.presenter = self
     }
     
-    func getNames() -> String {
+    func getName() -> String {
         interactor.name ?? "No Name"
     }
     

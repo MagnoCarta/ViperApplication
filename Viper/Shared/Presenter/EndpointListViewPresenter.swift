@@ -10,6 +10,7 @@ import Foundation
 class EndpointListViewPresenter: ObservableObject {
     
     private let interactor: EndpointListViewInteractor
+    private let router: EndpointListViewRouter = EndpointListViewRouter()
     let endpointName: Endpoint
     var view: EndpointListView?
     
@@ -24,13 +25,13 @@ class EndpointListViewPresenter: ObservableObject {
         interactor.fetchSummary()
     }
     
-    func hasFetchedSummary(summary: [SummaryEntity]) {
-        view?.summary = summary
+    func hasFetchedSummary(summaries: [SummaryEntity]) {
+        view?.summaries = summaries
     }
     
-//    func moveToEndpointListView(endpoint: Endpoint) -> EndpointListView {
-//        return router.makeEndpointListView(for: endpoint)
-//    }
+    func moveToDetailView(name: String) -> DetailView {
+        return router.makeDetailView(endpoint: endpointName,for: name)
+    }
     
     
 }

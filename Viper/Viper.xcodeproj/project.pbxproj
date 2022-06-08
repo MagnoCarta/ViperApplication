@@ -63,8 +63,8 @@
 		6C0DAC562841B60400B3E75C /* EndpointListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC542841B60300B3E75C /* EndpointListViewPresenter.swift */; };
 		6C0DAC582841B61800B3E75C /* EndpointListViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC572841B61800B3E75C /* EndpointListViewInteractor.swift */; };
 		6C0DAC592841B61800B3E75C /* EndpointListViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC572841B61800B3E75C /* EndpointListViewInteractor.swift */; };
-		6C64383228501D1C0008DAD3 /* EndListViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C64383128501D1C0008DAD3 /* EndListViewRouter.swift */; };
-		6C64383328501D1C0008DAD3 /* EndListViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C64383128501D1C0008DAD3 /* EndListViewRouter.swift */; };
+		6C64383228501D1C0008DAD3 /* EndpointListViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C64383128501D1C0008DAD3 /* EndpointListViewRouter.swift */; };
+		6C64383328501D1C0008DAD3 /* EndpointListViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C64383128501D1C0008DAD3 /* EndpointListViewRouter.swift */; };
 		6CAD6B8A2847948E00C688F2 /* GenericEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B892847948E00C688F2 /* GenericEntity.swift */; };
 		6CAD6B8B2847948E00C688F2 /* GenericEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B892847948E00C688F2 /* GenericEntity.swift */; };
 		6CAD6B8E284D3DFE00C688F2 /* BaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD6B8D284D3DFE00C688F2 /* BaseProtocols.swift */; };
@@ -130,7 +130,7 @@
 		6C0DAC512841B57800B3E75C /* EndpointListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointListView.swift; sourceTree = "<group>"; };
 		6C0DAC542841B60300B3E75C /* EndpointListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointListViewPresenter.swift; sourceTree = "<group>"; };
 		6C0DAC572841B61800B3E75C /* EndpointListViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointListViewInteractor.swift; sourceTree = "<group>"; };
-		6C64383128501D1C0008DAD3 /* EndListViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndListViewRouter.swift; sourceTree = "<group>"; };
+		6C64383128501D1C0008DAD3 /* EndpointListViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointListViewRouter.swift; sourceTree = "<group>"; };
 		6CAD6B892847948E00C688F2 /* GenericEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericEntity.swift; sourceTree = "<group>"; };
 		6CAD6B8D284D3DFE00C688F2 /* BaseProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocols.swift; sourceTree = "<group>"; };
 		6CAD6B91284D486200C688F2 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				6C0DAC3F284063B000B3E75C /* MainViewRouter.swift */,
-				6C64383128501D1C0008DAD3 /* EndListViewRouter.swift */,
+				6C64383128501D1C0008DAD3 /* EndpointListViewRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -495,7 +495,7 @@
 				6C0DAC3A2840639B00B3E75C /* MainViewPresenter.swift in Sources */,
 				6C0DAC4628419F5400B3E75C /* EndpointCard.swift in Sources */,
 				6C0DAC522841B57800B3E75C /* EndpointListView.swift in Sources */,
-				6C64383228501D1C0008DAD3 /* EndListViewRouter.swift in Sources */,
+				6C64383228501D1C0008DAD3 /* EndpointListViewRouter.swift in Sources */,
 				6C0DAC552841B60400B3E75C /* EndpointListViewPresenter.swift in Sources */,
 				5738AEDF284D568000FE37F4 /* DetailView.swift in Sources */,
 				57B2F692284708A100811ED0 /* Endpoint.swift in Sources */,
@@ -533,7 +533,7 @@
 				6C0DAC3B2840639B00B3E75C /* MainViewPresenter.swift in Sources */,
 				6C0DAC4728419F5400B3E75C /* EndpointCard.swift in Sources */,
 				6C0DAC532841B57800B3E75C /* EndpointListView.swift in Sources */,
-				6C64383328501D1C0008DAD3 /* EndListViewRouter.swift in Sources */,
+				6C64383328501D1C0008DAD3 /* EndpointListViewRouter.swift in Sources */,
 				6C0DAC562841B60400B3E75C /* EndpointListViewPresenter.swift in Sources */,
 				5738AEE0284D568000FE37F4 /* DetailView.swift in Sources */,
 				57B2F693284708A100811ED0 /* Endpoint.swift in Sources */,

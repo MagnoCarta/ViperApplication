@@ -25,14 +25,42 @@ class DetailViewPresenter: ObservableObject {
         interactor.name ?? "No Name"
     }
     
-    
-    func getInformation() -> StructDecoder {
-        
-        return CompanyEntity(id: nil, changeDateCategory: nil, country: nil, createdAt: nil, companyDescription: nil, developed: nil, logo: nil, name: nil, slug: nil, startDate: nil, startDateCategory: nil, updatedAt: nil, url: nil, websites: nil, checksum: nil, published: nil, parent: nil, changeDate: nil, changedCompanyID: nil, logoURL: nil)
+    func getImageURL() -> String {
+        var imageURL = ""
+        guard let _ = interactor.endpointEntity else {
+            return imageURL
+        }
+        switch interactor.endpoint {
+        case .character:
+            let character = interactor.endpointEntity as! CharacterEntity
+            if let characterMugShotURL = character.mugShotURL {
+                imageURL = characterMugShotURL
+            }
+        case .company:
+            let company = interactor.endpointEntity as! CompanyEntity
+            if let companyLogoURL = company.logoURL {
+                imageURL = companyLogoURL
+            }
+        case .game:
+            let game = interactor.endpointEntity as! GameEntity
+            if let gameCoverURL = game.coverURL {
+                imageURL = gameCoverURL
+            }
+        case .platform:
+            let platform = interactor.endpointEntity as! PlatformEntity
+            if let platformLogoURL = platform.platformLogoURL {
+                imageURL = platformLogoURL
+            }
+        }
+        return imageURL
     }
     
-    func fetchedNamesAndImages() {
-        
+    func fetchEntity() {
+        interactor.fetchEntity()
+    }
+    
+    func hasFetchedEntity() {
+        view?.entity = interactor.endpointEntity
     }
     
 }

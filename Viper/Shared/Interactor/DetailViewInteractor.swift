@@ -10,19 +10,23 @@ import SwiftUI
 
 class DetailViewInteractor {
     
+    let endpoint: Endpoint
     var name: String
-    var urlImages: [String?] = []
+    var endpointEntity: StructDecoder?
     weak var presenter: DetailViewPresenter?
     
-    init(name: String) {
+    init(endpoint: Endpoint, name: String) {
+        self.endpoint = endpoint
         self.name = name
+        fetchEntity()
     }
     
     func fetchEntity() {
-        var entity: StructDecoder
-        
-//        IGDBService.service.loadEndpointsWithFields(endpoint: <#T##Endpoint#>, fields: <#T##String#>, completion: <#T##(Any) -> Void#>)
-
+        let postString = "fields *; where name = \"\(name)\";"
+        IGDBService.service.loadEndpointsWithFields(endpoint: endpoint, fields: postString) { result in
+            self.endpointEntity = (result as! [StructDecoder]).first
+            self.presenter?.hasFetchedEntity()
+        }
     }
     
 }

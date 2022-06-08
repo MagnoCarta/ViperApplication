@@ -26,12 +26,12 @@ struct EndpointCard: View {
             .foregroundColor(.blue)
             .overlay(alignment: .center, content: {
                 if isTextCentered {
-                    Text(presenter.getNames())
+                    Text(presenter.getName())
                         .foregroundColor(.black)
                 } else {
                     VStack {
                         AsyncImage(url: URL(string: "https:\(presenter.getImageURL())"))
-                        Text(presenter.getNames())
+                        Text(presenter.getName())
                             .foregroundColor(.black)
                     }
                 }

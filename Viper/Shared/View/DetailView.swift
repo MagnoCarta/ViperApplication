@@ -11,10 +11,15 @@ import SwiftUI
 
 struct DetailView: View {
     
+    @ObservedObject var presenter: DetailViewPresenter
+    @State var entity: StructDecoder?
+    
     var body: some View {
-        
-        Text("oiee")
-        
+        presenter.view = self
+        return VStack {
+            AsyncImage(url: URL(string: "https:\(presenter.getImageURL())"))
+        }
+        .navigationTitle(presenter.getName())
     }
     
 }
