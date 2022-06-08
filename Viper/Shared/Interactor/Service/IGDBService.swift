@@ -51,7 +51,7 @@ class IGDBService {
     }
     
     func loadEndpointSummary(endpoint: Endpoint,completion: @escaping (Any) -> Void ) {
-        let fieldsEntity = "fields name, \(endpoint.imageType.1); limit 50;"
+        let fieldsEntity = "fields name, \(endpoint.imageType.1); limit 5; where \(endpoint.imageType.1) != null;"
         loadEndpointsWithFields(endpoint: endpoint, fields: fieldsEntity, completion: completion)
     }
     
@@ -67,12 +67,67 @@ class IGDBService {
                 let json: [StructDecoder] = self.loadJsonDecoded(endpoint: endpoint, data: data)
                 var mixedJson: [StructDecoder] = []
             
-                self.loadImagesURL(endpoint: endpoint, json: json, fields: "fields url; limit 50;", completion: { results in
-                    var index = 0
-                    results.forEach({ result in
-                        mixedJson.append(self.insertURL(endpoint: endpoint, noURL: json[index], withURL: results[index]))
-                        index += 1
-                    })
+                self.loadImagesURL(endpoint: endpoint, json: json, fields: "fields url;", completion: { results in
+                    switch endpoint {
+                    case .character:
+                        let characterWithURL = results as! [CharacterEntity]
+                        let characterWithoutURL = json as! [CharacterEntity]
+                        characterWithURL.forEach( { char in
+                         //   print("sss \((char as! CharacterEntity).id)")
+                        })
+                        characterWithoutURL.forEach( { char in
+                        //    print("bbb \((char as! CharacterEntity).mugShot)")
+                        })
+                        let characters = characterWithoutURL.map({ character -> StructDecoder in
+                            if let imageURL = characterWithURL.first(where: {
+                                $0.id == character.mugShot
+                            }) {
+                                return self.insertURL(endpoint: endpoint, noURL: character, withURL: imageURL)
+                            } else {
+                                return character
+                            }
+                        })
+                        mixedJson = characters
+                    case .company:
+                        let companyWithURL = results as! [CompanyEntity]
+                        let companyWithoutURL = json as! [CompanyEntity]
+                        let companies = companyWithoutURL.map({ company -> StructDecoder in
+                            if let imageURL = companyWithURL.first(where: {
+                                $0.id == company.logo
+                            }) {
+                                return self.insertURL(endpoint: endpoint, noURL: company, withURL: imageURL)
+                            } else {
+                                return company
+                            }
+                        })
+                        mixedJson = companies
+                    case .game:
+                        let gameWithUrl = results as! [GameEntity]
+                        let gameWithoutURL = json as! [GameEntity]
+                        let games = gameWithoutURL.map({ game -> StructDecoder in
+                            if let imageURL = gameWithUrl.first(where: {
+                                $0.id == game.cover
+                            }) {
+                                return self.insertURL(endpoint: endpoint, noURL: game, withURL: imageURL)
+                            } else {
+                                return game
+                            }
+                        })
+                        mixedJson = games
+                    case .platform:
+                        let platformWithUrl = results as! [PlatformEntity]
+                        let platformWithoutURL = json as! [PlatformEntity]
+                        let platforms = platformWithoutURL.map({ platform -> StructDecoder in
+                            if let imageURL = platformWithUrl.first(where: {
+                                $0.id == platform.platformLogo
+                            }) {
+                                return self.insertURL(endpoint: endpoint, noURL: platform, withURL: imageURL)
+                            } else {
+                                return platform
+                            }
+                        })
+                        mixedJson = platforms
+                    }
                     
                     completion(mixedJson)
                 })
@@ -105,7 +160,36 @@ class IGDBService {
         
         guard let url = getUrlForEndpoint(endpoint: endpoint, isFetchingImage: true) else { return }
         var request = getRequestForURL(url: url)
-        let postString = fields
+        var filteredField: String
+        filteredField = "\(fields) where id = ("
+        for decoder in json {
+            switch endpoint {
+            case .character:
+                let decoderWithType = decoder as! CharacterEntity
+                if let mugShot = decoderWithType.mugShot {
+                    filteredField += "\(mugShot),"
+                }
+            case .company:
+                let decoderWithType = decoder as! CompanyEntity
+                if let logo = decoderWithType.logo {
+                    filteredField += "\(logo),"
+                }
+            case .game:
+                let decoderWithType = decoder as! GameEntity
+                if let cover = decoderWithType.cover {
+                    filteredField += "\(cover),"
+                }
+            case .platform:
+                let decoderWithType = decoder as! PlatformEntity
+                if let platformLogo = decoderWithType.platformLogo {
+                    filteredField += "\(platformLogo),"
+                }
+            }
+        }
+        filteredField.removeLast()
+        filteredField = "\(filteredField));"
+        print(filteredField)
+        let postString = filteredField
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             
@@ -144,38 +228,6 @@ class IGDBService {
         
         return inserted
         
-    }
-    
-    func loadEndpoints() -> [String] {
-        let url = URL(string: "https://api-docs.igdb.com")
-        
-        do {
-            let content = try String(contentsOf: url!, encoding: .utf8)
-            let str = content.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-            var newStr: String = ""
-            
-            if let index = str.index(of: "Endpoints"){
-                newStr = String(str[index...])
-                newStr = newStr.replacingOccurrences(of: "Endpoints", with: "")
-            }
-            
-            if let indexReference = newStr.index(of: "Reference"){
-                newStr = String(newStr[..<indexReference])
-            }
-          
-            var allEndpoints = newStr.components(separatedBy: "  ").filter({
-                $0 != "\n" && $0 != ""
-            })
-            
-            allEndpoints =  allEndpoints.map {
-                $0.replacingOccurrences(of: "\n", with: "")
-            }
-            return allEndpoints
-            
-        } catch let error {
-            print(error.localizedDescription)
-            return []
-        }
     }
     
     func getFields() -> [String] {
@@ -237,21 +289,5 @@ extension StringProtocol {
                         index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
             }
             return result
-        }
-
-        func substring(from: Int) -> String {
-            let fromIndex = index(from: from)
-            return String(self[fromIndex...])
-        }
-
-        func substring(to: Int) -> String {
-            let toIndex = index(from: to)
-            return String(self[..<toIndex])
-        }
-
-        func substring(with r: Range<Int>) -> String {
-            let startIndex = index(from: r.lowerBound)
-            let endIndex = index(from: r.upperBound)
-            return String(self[startIndex..<endIndex])
         }
 }

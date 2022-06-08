@@ -25,7 +25,7 @@ struct EndpointCard: View {
             .foregroundColor(.blue)
             .overlay(alignment: .center, content: {
                 ZStack {
-                    AsyncImage(url: URL(string: presenter.getImageURL()))
+                    AsyncImage(url: URL(string: "https:\(presenter.getImageURL())"))
                     Text(presenter.getNames())
                     .foregroundColor(.black)
                 }

@@ -28,6 +28,9 @@ class EndpointListViewPresenter: ObservableObject {
         view?.summary = summary
     }
     
+//    func moveToEndpointListView(endpoint: Endpoint) -> EndpointListView {
+//        return router.makeEndpointListView(for: endpoint)
+//    }
     
     
 }

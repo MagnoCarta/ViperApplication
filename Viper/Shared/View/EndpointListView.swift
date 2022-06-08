@@ -21,8 +21,7 @@ struct EndpointListView: View {
     var body: some View {
         presenter.view = self
         presenter.fetchSummary()
-        return NavigationView {
-            ScrollView {
+            return ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(summary,id:\.self) { summary in
                         NavigationLink {
@@ -34,9 +33,8 @@ struct EndpointListView: View {
                     }
                 }
                 .padding()
+                .navigationTitle(presenter.endpointName.rawValue)
             }
-            .navigationTitle("Endpoints")
-        }
     }
     
     func buildCard(endpoint: Endpoint,name: String,imageURL: String) -> EndpointCard {
