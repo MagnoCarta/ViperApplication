@@ -54,7 +54,7 @@ struct MainView: View {
     func buildCard(endpoint: Endpoint) -> EndpointCard {
         let interactor = EndpointCardInteractor(endpoint: endpoint)
         let endpointPresenter = EndpointCardPresenter(interactor: interactor)
-        return EndpointCard(presenter: endpointPresenter)
+        return EndpointCard(presenter: endpointPresenter, isTextCentered: true)
     }
     
 }

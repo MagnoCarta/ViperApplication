@@ -40,7 +40,7 @@ struct EndpointListView: View {
     func buildCard(endpoint: Endpoint,name: String,imageURL: String) -> EndpointCard {
         let interactor = EndpointCardInteractor(endpoint: endpoint,name: name,imageURL: imageURL)
         let endpointPresenter = EndpointCardPresenter(interactor: interactor)
-        return EndpointCard(presenter: endpointPresenter)
+        return EndpointCard(presenter: endpointPresenter, isTextCentered: false)
     }
     
 }

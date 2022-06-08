@@ -13,6 +13,7 @@ struct EndpointCard: View {
     
     let presenter: EndpointCardPresenter
     @State var observedObject: String?
+    let isTextCentered: Bool
     
     var body: some View {
         presenter.view = self
@@ -24,10 +25,15 @@ struct EndpointCard: View {
             .cornerRadius(15)
             .foregroundColor(.blue)
             .overlay(alignment: .center, content: {
-                ZStack {
-                    AsyncImage(url: URL(string: "https:\(presenter.getImageURL())"))
+                if isTextCentered {
                     Text(presenter.getNames())
-                    .foregroundColor(.black)
+                        .foregroundColor(.black)
+                } else {
+                    VStack {
+                        AsyncImage(url: URL(string: "https:\(presenter.getImageURL())"))
+                        Text(presenter.getNames())
+                            .foregroundColor(.black)
+                    }
                 }
             })
     }
