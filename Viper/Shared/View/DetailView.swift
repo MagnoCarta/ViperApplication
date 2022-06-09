@@ -12,7 +12,6 @@ import SwiftUI
 struct DetailView: View {
     
     @ObservedObject var presenter: DetailViewPresenter
-    @State var entity: StructDecoder?
     
     var body: some View {
         presenter.view = self

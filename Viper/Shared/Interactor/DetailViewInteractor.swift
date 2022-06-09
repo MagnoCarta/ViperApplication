@@ -18,7 +18,6 @@ class DetailViewInteractor {
     init(endpoint: Endpoint, name: String) {
         self.endpoint = endpoint
         self.name = name
-        fetchEntity()
     }
     
     func fetchEntity() {

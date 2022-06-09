@@ -27,7 +27,9 @@ class EndpointListViewPresenter: ObservableObject {
     }
     
     func hasFetchedSummary() {
-        updateToggle = !updateToggle
+        DispatchQueue.main.async {
+            self.updateToggle = !self.updateToggle
+        }
     }
     
     func moveToDetailView(name: String) -> DetailView {

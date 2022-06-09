@@ -26,7 +26,7 @@ struct EndpointListView: View {
                 ForEach(presenter.getSummaries(),id:\.self) { summary in
                     NavigationLink {
                         if let summaryName = summary.name {
-                            presenter.moveToDetailView(name: summaryName)
+                            NavigationLazyView(presenter.moveToDetailView(name: summaryName))
                         }
                     } label: {
                         buildCard(endpoint: presenter.endpointName, name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")

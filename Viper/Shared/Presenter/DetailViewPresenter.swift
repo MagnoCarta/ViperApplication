@@ -13,12 +13,12 @@ class DetailViewPresenter: ObservableObject {
     
     private let interactor: DetailViewInteractor
     var view: DetailView?
-
-    //private let router = EndpointRouter()
+    @Published var updateToggle: Bool = false
     
     init(interactor: DetailViewInteractor) {
         self.interactor = interactor
         interactor.presenter = self
+        self.fetchEntity()
     }
     
     func getName() -> String {
@@ -60,7 +60,13 @@ class DetailViewPresenter: ObservableObject {
     }
     
     func hasFetchedEntity() {
-        view?.entity = interactor.endpointEntity
+        DispatchQueue.main.async {
+            self.updateToggle = !self.updateToggle
+        }
+    }
+    
+    func getEntity() -> StructDecoder? {
+        return interactor.endpointEntity
     }
     
 }
