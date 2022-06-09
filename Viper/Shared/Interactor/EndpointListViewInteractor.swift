@@ -11,8 +11,8 @@ import SwiftUI
 class EndpointListViewInteractor {
     
     let endpoint: Endpoint
-    var names: [String?] = []
-    var urlImages: [String?] = []
+    var page: Int = 0
+    var summaries: [SummaryEntity] = []
     weak var presenter: EndpointListViewPresenter?
     
     init(endpoint: Endpoint) {
@@ -22,7 +22,7 @@ class EndpointListViewInteractor {
     func fetchSummary() {
         var summary: [(String?, Int?)] = []
         var trueSummary: [SummaryEntity] = []
-        IGDBService.service.loadEndpointSummary(endpoint: endpoint, completion: { result in
+        IGDBService.service.loadEndpointSummary(endpoint: endpoint,page: page, completion: { result in
             
             switch self.endpoint {
             case .character:
@@ -46,10 +46,24 @@ class EndpointListViewInteractor {
                     SummaryEntity(originalEntity: self.endpoint.rawValue, name: platform.name, imageURL: platform.platformLogoURL)
                 })
             }
-            
-            self.presenter?.hasFetchedSummary(summaries: trueSummary)
+            self.summaries.append(contentsOf: trueSummary)
+            self.presenter?.hasFetchedSummary()
         })
 
+    }
+    
+    
+    func loadMoreContentIfNeeded(summary: SummaryEntity?) {
+        let loadedSummary = self.summaries.last
+        if loadedSummary == summary {
+            self.fetchSummary()
+            page += 1
+        }
+//        if summary == nil {
+//            self.fetchSummary()
+//            page += 1
+//        }
+        
     }
     
 }

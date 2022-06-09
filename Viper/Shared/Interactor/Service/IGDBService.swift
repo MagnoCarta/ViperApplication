@@ -50,8 +50,8 @@ class IGDBService {
         loadEndpointsWithFields(endpoint: endpoint,fields: fields, completion: completionHandler)
     }
     
-    func loadEndpointSummary(endpoint: Endpoint,completion: @escaping (Any) -> Void ) {
-        let fieldsEntity = "fields name, \(endpoint.imageType.1); limit 5; where \(endpoint.imageType.1) != null;"
+    func loadEndpointSummary(endpoint: Endpoint,page: Int,completion: @escaping (Any) -> Void ) {
+        let fieldsEntity = "fields name, \(endpoint.imageType.1); limit 200; where \(endpoint.imageType.1) != null;"
         loadEndpointsWithFields(endpoint: endpoint, fields: fieldsEntity, completion: completion)
     }
     

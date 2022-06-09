@@ -11,8 +11,7 @@ import SwiftUI
 
 struct EndpointCard: View {
     
-    let presenter: EndpointCardPresenter
-    @State var observedObject: String?
+    @ObservedObject var presenter: EndpointCardPresenter
     let isTextCentered: Bool
     
     var body: some View {
@@ -38,12 +37,5 @@ struct EndpointCard: View {
             })
     }
     
-    func resetView() {
-        if let _ = observedObject {
-            self.observedObject! += "."
-        } else {
-            observedObject = "."
-        }
-    }
     
 }

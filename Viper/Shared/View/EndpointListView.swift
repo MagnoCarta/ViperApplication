@@ -16,27 +16,30 @@ struct EndpointListView: View {
     ]
     let height: CGFloat = 150
     @ObservedObject var presenter: EndpointListViewPresenter
-    @State var summaries: [SummaryEntity] = []
+    
     
     var body: some View {
         presenter.view = self
-        presenter.fetchSummary()
-            return ScrollView {
-                LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(summaries,id:\.self) { summary in
-                        NavigationLink {
-                            if let summaryName = summary.name {
-                                presenter.moveToDetailView(name: summaryName)
-                            }
-                        } label: {
-                            buildCard(endpoint: presenter.endpointName, name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")
+        presenter.changePageIfNeeded(summary: nil)
+        return ScrollView {
+            LazyVGrid(columns: columns, spacing: 16) {
+                ForEach(presenter.getSummaries(),id:\.self) { summary in
+                    NavigationLink {
+                        if let summaryName = summary.name {
+                            presenter.moveToDetailView(name: summaryName)
                         }
-                        .frame(width: 150, height: 150, alignment: .center)
+                    } label: {
+                        buildCard(endpoint: presenter.endpointName, name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")
+                            .onAppear(){
+                                presenter.changePageIfNeeded(summary: summary)
+                            }
                     }
+                    .frame(width: 150, height: 150, alignment: .center)
                 }
-                .padding()
-                .navigationTitle(presenter.endpointName.rawValue)
             }
+            .padding()
+            .navigationTitle(presenter.endpointName.rawValue)
+        }
     }
     
     func buildCard(endpoint: Endpoint,name: String,imageURL: String) -> EndpointCard {

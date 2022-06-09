@@ -14,6 +14,7 @@ class EndpointCardPresenter: ObservableObject {
     private let interactor: EndpointCardInteractor
     let endpointName: Endpoint
     var view: EndpointCard?
+    @Published var updateToggle: Bool = false
 
     //private let router = EndpointRouter()
     
@@ -34,7 +35,7 @@ class EndpointCardPresenter: ObservableObject {
     }
     
     func fetchedNamesAndImages() {
-        self.view?.resetView()
+        updateToggle != updateToggle
     }
     
 }
