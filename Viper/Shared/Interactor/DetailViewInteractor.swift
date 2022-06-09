@@ -12,7 +12,7 @@ class DetailViewInteractor {
     
     let endpoint: Endpoint
     var name: String
-    var endpointEntity: StructDecoder?
+    var endpointEntity: GenericEntity?
     weak var presenter: DetailViewPresenter?
     
     init(endpoint: Endpoint, name: String) {
@@ -23,7 +23,7 @@ class DetailViewInteractor {
     func fetchEntity() {
         let postString = "fields *; where name = \"\(name)\";"
         IGDBService.service.loadEndpointsWithFields(endpoint: endpoint, fields: postString) { result in
-            self.endpointEntity = (result as! [StructDecoder]).first
+            self.endpointEntity = (result as! [GenericEntity]).first
             self.presenter?.hasFetchedEntity()
         }
     }

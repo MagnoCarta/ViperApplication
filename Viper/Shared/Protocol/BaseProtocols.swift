@@ -18,7 +18,7 @@ protocol ViewToPresenterProtocol: AnyObject {
 }
 
 protocol PresenterToViewProtocol: AnyObject {
-    func loadEndpointsInfo(noticeArray:Array<StructDecoder>)
+    func loadEndpointsInfo(noticeArray:Array<GenericEntity>)
     func showError()
 }
 
@@ -31,6 +31,6 @@ protocol PresenterToInteractorProtocol: AnyObject {
 }
 
 protocol InteractorToPresenterProtocol: AnyObject {
-    func endpointsInfoFetchedSuccess(noticeModelArray:Array<StructDecoder>)
+    func endpointsInfoFetchedSuccess(noticeModelArray:Array<GenericEntity>)
     func noticeFetchFailed()
 }

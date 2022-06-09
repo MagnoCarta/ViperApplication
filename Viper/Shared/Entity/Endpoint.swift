@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum Endpoint: String, CaseIterable {
+enum Endpoint: String, Codable, CaseIterable {
     case character = "Character", company = "Company", game = "Game", platform = "Platform"
     
     func getImageField() -> String {

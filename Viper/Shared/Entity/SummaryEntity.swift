@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SummaryEntity: Codable, StructDecoder,Hashable {
+struct SummaryEntity: Codable, StructDecoder, Hashable {
     static var entityName: String = "Summary"
     
     let originalEntity: String?
