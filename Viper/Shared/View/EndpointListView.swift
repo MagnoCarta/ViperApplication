@@ -43,8 +43,9 @@ struct EndpointListView: View {
     }
     
     func buildCard(endpoint: Endpoint,name: String,imageURL: String) -> EndpointCard {
-        let interactor = EndpointCardInteractor(endpoint: endpoint,name: name,imageURL: imageURL)
+        let interactor = EndpointCardInteractor()
         let endpointPresenter = EndpointCardPresenter(interactor: interactor)
+        endpointPresenter.fetchCard(endpoint: endpoint, name: name, imageURL: imageURL)
         return EndpointCard(presenter: endpointPresenter, isTextCentered: false)
     }
     

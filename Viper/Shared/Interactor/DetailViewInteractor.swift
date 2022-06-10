@@ -10,14 +10,15 @@ import SwiftUI
 
 class DetailViewInteractor {
     
-    let endpoint: Endpoint
-    var name: String
+    var endpoint: Endpoint = Endpoint.character
+    var name: String = "Default Name"
     var endpointEntity: GenericEntity?
     weak var presenter: DetailViewPresenter?
     
-    init(endpoint: Endpoint, name: String) {
+    func fetchEndpointAndName(endpoint: Endpoint,name: String) {
         self.endpoint = endpoint
         self.name = name
+        fetchEntity()
     }
     
     func fetchEntity() {

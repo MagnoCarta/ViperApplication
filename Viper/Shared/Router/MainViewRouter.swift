@@ -11,8 +11,9 @@ import SwiftUI
 
 class MainViewRouter {
   func makeEndpointListView(for endpointName: Endpoint) -> EndpointListView {
-      let interactor = EndpointListViewInteractor(endpoint: endpointName)
+      let interactor = EndpointListViewInteractor()
       let endpointListViewPresenter = EndpointListViewPresenter(interactor: interactor)
+      endpointListViewPresenter.fetchEndpoint(endpoint: endpointName)
       return EndpointListView(presenter: endpointListViewPresenter)
   }
 }

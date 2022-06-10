@@ -13,10 +13,14 @@ struct ViperApp: App {
 
     var body: some Scene {
         WindowGroup {
-            let interactor = MainViewInteractor(endpointNames: Endpoint.allCases)
-            let presenter = MainViewPresenter(interactor: interactor)
-            
-            MainView(presenter: presenter)
+            createView()
         }
+    }
+    
+    func createView() -> some View {
+        let interactor = MainViewInteractor()
+        let presenter = MainViewPresenter(interactor: interactor)
+        presenter.fetchNames(endpoints: Endpoint.allCases)
+        return MainView(presenter: presenter)
     }
 }

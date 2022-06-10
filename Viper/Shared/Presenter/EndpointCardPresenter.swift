@@ -10,32 +10,37 @@ import SwiftUI
 
 class EndpointCardPresenter: ObservableObject {
     
-    
-    private let interactor: EndpointCardInteractor
-    let endpointName: Endpoint
+    // MARK: Variables
+    private var interactor: EndpointCardInteractor?
+    let endpointName: Endpoint = Endpoint.character
     var view: EndpointCard?
     @Published var updateToggle: Bool = false
-
     //private let router = EndpointRouter()
     
+    // MARK: Init Interactor
     init(interactor: EndpointCardInteractor) {
         self.interactor = interactor
-        self.endpointName = interactor.endpoint
-        
         interactor.presenter = self
     }
     
+    // MARK: Get Functions
     func getName() -> String {
-        interactor.name ?? "No Name"
+        interactor?.name ?? "No Name"
     }
     
     func getImageURL() -> String {
-        guard let imageURL = interactor.imageURL else { return "" }
+        guard let imageURL = interactor?.imageURL else { return "" }
         return imageURL
     }
     
-    func fetchedNamesAndImages() {
-        updateToggle != updateToggle
+    // MARK: Fetch Functions
+    func hasFetched() {
+        updateToggle = !updateToggle
     }
+    
+    func fetchCard(endpoint: Endpoint,name: String, imageURL: String) {
+        self.interactor?.fetchCard(endpoint: endpoint, name: name, imageURL: imageURL)
+    }
+   
     
 }

@@ -18,9 +18,9 @@ struct MainView: View {
     @ObservedObject var presenter: MainViewPresenter
     
     var body: some View {
-        
+        self.presenter.view = self
 #if os(iOS)
-        NavigationView {
+        return NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(presenter.getNames(),id:\.self) { endpoint in
@@ -52,8 +52,9 @@ struct MainView: View {
     }
     
     func buildCard(endpoint: Endpoint) -> EndpointCard {
-        let interactor = EndpointCardInteractor(endpoint: endpoint)
+        let interactor = EndpointCardInteractor()
         let endpointPresenter = EndpointCardPresenter(interactor: interactor)
+        endpointPresenter.fetchCard(endpoint: endpoint, name: endpoint.rawValue, imageURL: "")
         return EndpointCard(presenter: endpointPresenter, isTextCentered: true)
     }
     

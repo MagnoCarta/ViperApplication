@@ -10,26 +10,36 @@ import SwiftUI
 
 class DetailViewPresenter: ObservableObject {
     
-    private let interactor: DetailViewInteractor
+    // MARK: Variables
+    private var interactor: DetailViewInteractor?
     var view: DetailView?
     @Published var updateToggle: Bool = false
     
     init(interactor: DetailViewInteractor) {
         self.interactor = interactor
         interactor.presenter = self
-        self.fetchEntity()
     }
     
+    // MARK: Get Functions
     func getName() -> String {
-        return interactor.name
+        return interactor?.name ?? "Default Name"
     }
     
     func getImageURL() -> String {
-        return interactor.endpointEntity?.imageURL ?? ""
+        return interactor?.endpointEntity?.imageURL ?? ""
+    }
+    
+    func getEntity() -> GenericEntity? {
+        return interactor?.endpointEntity
+    }
+    
+    // MARK: Fetch Functions
+    func fetchNameAndImage(endpoint: Endpoint,name: String) {
+        interactor?.fetchEndpointAndName(endpoint: endpoint, name: name)
     }
     
     func fetchEntity() {
-        return interactor.fetchEntity()
+        interactor?.fetchEntity()
     }
     
     func hasFetchedEntity() {
@@ -37,9 +47,4 @@ class DetailViewPresenter: ObservableObject {
             self.updateToggle = !self.updateToggle
         }
     }
-    
-    func getEntity() -> GenericEntity? {
-        return interactor.endpointEntity
-    }
-    
 }

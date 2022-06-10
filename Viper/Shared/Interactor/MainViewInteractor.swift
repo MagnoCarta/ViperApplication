@@ -10,10 +10,12 @@ import SwiftUI
 
 class MainViewInteractor {
     
-    let endpointNames: [Endpoint]
+    var endpointNames: [Endpoint] = []
+    var presenter: MainViewPresenter?
     
-    init(endpointNames: [Endpoint]) {
-        self.endpointNames = endpointNames
+    func fetchEndpoints(endpoints: [Endpoint]) {
+        self.endpointNames = endpoints
+        self.presenter?.hasFetchedNames()
     }
     
 }

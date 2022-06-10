@@ -10,15 +10,11 @@ import SwiftUI
 
 class EndpointListViewInteractor {
     
-    let endpoint: Endpoint
+    var endpoint: Endpoint = Endpoint.character
     var page: Int = 0
     var summaries: [SummaryEntity] = []
     weak var presenter: EndpointListViewPresenter?
-    
-    init(endpoint: Endpoint) {
-        self.endpoint = endpoint
-    }
-    
+
     func fetchSummary() {
         var trueSummary: [SummaryEntity] = []
         IGDBService.service.loadEndpointSummary(endpoint: endpoint,page: page, completion: { result in
@@ -29,11 +25,10 @@ class EndpointListViewInteractor {
             })
             
             self.summaries.append(contentsOf: trueSummary)
-            self.presenter?.hasFetchedSummary()
+            self.presenter?.hasFetched()
         })
         
     }
-    
     
     func loadMoreContentIfNeeded(summary: SummaryEntity?) {
         let loadedSummary = self.summaries.last
@@ -41,11 +36,11 @@ class EndpointListViewInteractor {
             self.fetchSummary()
             page += 1
         }
-//        if summary == nil {
-//            self.fetchSummary()
-//            page += 1
-//        }
-        
+    }
+    
+    func fetchEndpoint(endpoint: Endpoint) {
+        self.endpoint = endpoint
+        self.fetchSummary()
     }
     
 }
