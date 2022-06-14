@@ -16,7 +16,10 @@ class CoreDataService {
     private init() {}
     
     func saveEntities(entities: [StructDecoder]) {
-        _ = entities.compactMap({ entity in
+        let _: [NSManagedObject] = entities.compactMap({ entity in
+            if existsInCoreData(entity: entity as! GenericEntity) {
+                return nil
+            }
             return try? entity.toCoreData(context: context)
         })
         do {
@@ -29,12 +32,35 @@ class CoreDataService {
     
     func getEntities(endpoint: Endpoint) -> [GenericEntity] {
         let entitiesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: GenericEntity.entityName)
+        let predicate = NSPredicate(format: "endpoint == %@", endpoint.rawValue)
+        entitiesFetchRequest.predicate = predicate
         do {
             let entities = try PersistenceController.shared.container.viewContext.fetch(entitiesFetchRequest)
-            return entities as! [GenericEntity]
+            return convertToGenericEntities(entities: entities as! [Generic])
         } catch {
             return []
         }
+    }
+    
+    func existsInCoreData(entity: GenericEntity) -> Bool {
+        let entitiesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: GenericEntity.entityName)
+        let predicate = NSPredicate(format: "endpoint == %@ AND id == %d", entity.endpoint.rawValue, entity.id!)
+        entitiesFetchRequest.predicate = predicate
+        do {
+            let entities = try PersistenceController.shared.container.viewContext.fetch(entitiesFetchRequest)
+            return entities.first != nil
+        } catch {
+            print("It was not possible to fetch")
+            return false
+        }
+    }
+    
+    func convertToGenericEntities(entities: [Generic]) -> [GenericEntity] {
+        var converteEntities: [GenericEntity] = []
+        converteEntities = entities.map( { entity in
+            GenericEntity(endpoint: Endpoint(rawValue: entity.endpoint ?? "Character")!, id: Int(entity.id), name: entity.name ?? "No Name", textDescription: entity.textDescription ?? "No Description", imageID: Int(entity.imageID), imageURL: entity.imageURL ?? "No Url")
+        })
+        return converteEntities
     }
     
 }

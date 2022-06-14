@@ -87,5 +87,4 @@ extension StructDecoder {
         return managedObject
         
     }
-    
 }

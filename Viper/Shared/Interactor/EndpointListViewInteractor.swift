@@ -16,23 +16,35 @@ class EndpointListViewInteractor {
     weak var presenter: EndpointListViewPresenter?
 
     func fetchSummary() {
-        summaries = CoreDataService.service.getEntities(endpoint: endpoint)
-        print(summaries)
-        if summaries.count / IGDBService.requestCount <= page {
-            IGDBService.service.loadEndpointWithDefaultFields(endpoint: endpoint, page: page, completion: { result in
-                let entities = result as! [GenericEntity]
-                self.summaries.append(contentsOf: entities)
-                CoreDataService.service.saveEntities(entities: self.summaries)
+        if summaries.count == 0 {
+            summaries = CoreDataService.service.getEntities(endpoint: endpoint)
+            if !summaries.isEmpty {
                 self.presenter?.hasFetched()
-            })
+                self.page = (self.summaries.count / IGDBService.requestCount)
+                print(summaries.count)
+            } else {
+                fetchFromAPI()
+            }
         }
+        else {
+            fetchFromAPI()
+        }
+    }
+    
+    func fetchFromAPI() {
+        IGDBService.service.loadEndpointWithDefaultFields(endpoint: endpoint, page: page, completion: { result in
+            let entities = result as! [GenericEntity]
+            self.summaries.append(contentsOf: entities)
+            CoreDataService.service.saveEntities(entities: self.summaries)
+            self.page = (self.summaries.count / IGDBService.requestCount)
+            self.presenter?.hasFetched()
+        })
     }
     
     func loadMoreContentIfNeeded(summary: GenericEntity?) {
         let loadedSummary = self.summaries.last
         if loadedSummary == summary {
             self.fetchSummary()
-            page += 1
         }
     }
     
