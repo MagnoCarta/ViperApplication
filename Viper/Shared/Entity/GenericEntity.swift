@@ -8,7 +8,7 @@
 import Foundation
 
 struct GenericEntity: StructDecoder, Hashable {
-    static var entityName: String = "GenericEntity"
+    static var entityName: String = "Generic"
     
     let endpoint: Endpoint
     let id: Int?

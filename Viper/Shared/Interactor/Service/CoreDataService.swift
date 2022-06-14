@@ -9,7 +9,11 @@ import Foundation
 import CoreData
 
 class CoreDataService {
+    
     let context = PersistenceController.shared.container.viewContext
+    static let service = CoreDataService()
+    
+    private init() {}
     
     func saveEntities(entities: [StructDecoder]) {
         _ = entities.compactMap({ entity in
@@ -23,13 +27,13 @@ class CoreDataService {
         }
     }
     
-    func getEntities<T: StructDecoder>(entityType: T, endpoint: Endpoint) {
-        let entitiesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: T.entityName)
+    func getEntities(endpoint: Endpoint) -> [GenericEntity] {
+        let entitiesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: GenericEntity.entityName)
         do {
             let entities = try PersistenceController.shared.container.viewContext.fetch(entitiesFetchRequest)
-            print(entities)
+            return entities as! [GenericEntity]
         } catch {
-            
+            return []
         }
     }
     

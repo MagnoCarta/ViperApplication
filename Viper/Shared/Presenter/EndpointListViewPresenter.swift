@@ -50,8 +50,8 @@ class EndpointListViewPresenter: ObservableObject {
     }
     
     // MARK: Router
-    func moveToDetailView(name: String) -> DetailView {
-        return router.makeDetailView(endpoint: getEndpoint(),for: name)
+    func moveToDetailView(entity: GenericEntity) -> DetailView {
+        return router.makeDetailView(endpoint: getEndpoint(), for: entity)
     }
     
     // MARK: Pagination

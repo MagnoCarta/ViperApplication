@@ -16,11 +16,16 @@ class EndpointListViewInteractor {
     weak var presenter: EndpointListViewPresenter?
 
     func fetchSummary() {
-        IGDBService.service.loadEndpointWithDefaultFields(endpoint: endpoint, page: page, completion: { result in
-            let entities = result as! [GenericEntity]
-            self.summaries.append(contentsOf: entities)
-            self.presenter?.hasFetched()
-        })
+        summaries = CoreDataService.service.getEntities(endpoint: endpoint)
+        print(summaries)
+        if summaries.count / IGDBService.requestCount <= page {
+            IGDBService.service.loadEndpointWithDefaultFields(endpoint: endpoint, page: page, completion: { result in
+                let entities = result as! [GenericEntity]
+                self.summaries.append(contentsOf: entities)
+                CoreDataService.service.saveEntities(entities: self.summaries)
+                self.presenter?.hasFetched()
+            })
+        }
     }
     
     func loadMoreContentIfNeeded(summary: GenericEntity?) {

@@ -11,22 +11,13 @@ import SwiftUI
 class DetailViewInteractor {
     
     var endpoint: Endpoint = Endpoint.character
-    var name: String = "Default Name"
     var endpointEntity: GenericEntity?
     weak var presenter: DetailViewPresenter?
     
-    func fetchEndpointAndName(endpoint: Endpoint,name: String) {
+    func setEndpoint(endpoint: Endpoint, summary: GenericEntity) {
         self.endpoint = endpoint
-        self.name = name
-        fetchEntity()
-    }
-    
-    func fetchEntity() {
-        let postString = "fields name, \(endpoint.imageType.1), \(endpoint.descriptionType); where name = \"\(name)\";"
-        IGDBService.service.loadEndpointsWithFields(endpoint: endpoint, fields: postString) { result in
-            self.endpointEntity = (result as! [GenericEntity]).first
-            self.presenter?.hasFetchedEntity()
-        }
+        self.endpointEntity = summary
+        presenter?.hasFetchedEntity()
     }
     
 }

@@ -37,9 +37,7 @@ struct EndpointListView: View {
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(presenter.getSummaries(),id:\.self) { summary in
                 NavigationLink {
-                    if let summaryName = summary.name {
-                        NavigationLazyView(presenter.moveToDetailView(name: summaryName))
-                    }
+                    NavigationLazyView(presenter.moveToDetailView(entity: summary))
                 } label: {
                     buildCard(endpoint: presenter.getEndpoint(), name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")
                         .onAppear(){

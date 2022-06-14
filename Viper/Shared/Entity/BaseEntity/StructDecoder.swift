@@ -77,7 +77,11 @@ extension StructDecoder {
                     continue
                 }
             }
-            managedObject.setValue(anyValue, forKey: label)
+            if subMirror.displayStyle == .enum {
+                managedObject.setValue((anyValue as! Endpoint).rawValue, forKey: label)
+            } else {
+                managedObject.setValue(anyValue, forKey: label)
+            }
         }
         
         return managedObject

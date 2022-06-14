@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 
 class EndpointListViewRouter {
-    func makeDetailView(endpoint: Endpoint, for name: String) -> DetailView {
+    func makeDetailView(endpoint: Endpoint, for summary: GenericEntity) -> DetailView {
         let interactor = DetailViewInteractor()
         let detailViewPresenter = DetailViewPresenter(interactor: interactor)
-        detailViewPresenter.fetchNameAndImage(endpoint: endpoint, name: name)
+        detailViewPresenter.fetchEntity(endpoint: endpoint, summary: summary)
         return DetailView(presenter: detailViewPresenter)
     }
 }

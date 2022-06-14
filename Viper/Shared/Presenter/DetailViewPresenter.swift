@@ -22,7 +22,7 @@ class DetailViewPresenter: ObservableObject {
     
     // MARK: Get Functions
     func getName() -> String {
-        return interactor?.name ?? "Default Name"
+        return interactor?.endpointEntity?.name ?? "Default Name"
     }
     
     func getImageURL() -> String {
@@ -42,12 +42,8 @@ class DetailViewPresenter: ObservableObject {
     }
     
     // MARK: Fetch Functions
-    func fetchNameAndImage(endpoint: Endpoint,name: String) {
-        interactor?.fetchEndpointAndName(endpoint: endpoint, name: name)
-    }
-    
-    func fetchEntity() {
-        interactor?.fetchEntity()
+    func fetchEntity(endpoint: Endpoint, summary: GenericEntity) {
+        interactor?.setEndpoint(endpoint: endpoint, summary: summary)
     }
     
     func hasFetchedEntity() {
