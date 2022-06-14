@@ -9,24 +9,28 @@ import Foundation
 import CoreData
 
 class CoreDataService {
+    let context = PersistenceController.shared.container.viewContext
     
-    
-    func saveSummary() {
-        
-    }
-    
-    func getSummary() {
-        let summaryFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: GenericEntity.entityName)
+    func saveEntities(entities: [StructDecoder]) {
+        _ = entities.compactMap({ entity in
+            return try? entity.toCoreData(context: context)
+        })
         do {
-            let summaries = try PersistenceController.shared.container.viewContext.fetch(summaryFetchRequest)
-            print(summaries)
+            try context.save()
         } catch {
-            
+            print("It was not possible to save the context")
+            print(error)
         }
     }
     
-    func getEntity() {
-        
+    func getEntities<T: StructDecoder>(entityType: T, endpoint: Endpoint) {
+        let entitiesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: T.entityName)
+        do {
+            let entities = try PersistenceController.shared.container.viewContext.fetch(entitiesFetchRequest)
+            print(entities)
+        } catch {
+            
+        }
     }
     
 }

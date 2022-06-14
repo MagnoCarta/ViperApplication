@@ -1,120 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Character" representedClassName="Character" syncable="YES" codeGenerationType="class">
-        <attribute name="characterDescription" optional="YES" attributeType="String"/>
-        <attribute name="checksum" optional="YES" attributeType="String"/>
-        <attribute name="createdAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="games" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="gender" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="Generic" representedClassName="Generic" syncable="YES" codeGenerationType="class">
+        <attribute name="endpoint" optional="YES" attributeType="String" customClassName="Endpoint"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="mugShot" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="slug" optional="YES" attributeType="String"/>
-        <attribute name="species" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="url" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="Company" representedClassName="Company" syncable="YES" codeGenerationType="class">
-        <attribute name="changeDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="changeDateCategory" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="changedCompanyID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="checksum" optional="YES" attributeType="String"/>
-        <attribute name="companyDescription" optional="YES" attributeType="String"/>
-        <attribute name="country" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="createdAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="developed" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="logo" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="parent" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="published" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="slug" optional="YES" attributeType="String"/>
-        <attribute name="startDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="startDateCategory" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="url" optional="YES" attributeType="String"/>
-        <attribute name="websites" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-    </entity>
-    <entity name="Game" representedClassName="Game" syncable="YES" codeGenerationType="class">
-        <attribute name="ageRatings" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="aggregatedRating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="aggregatedRatingCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="alternativeNames" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="artworks" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="bundles" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="category" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="checksum" optional="YES" attributeType="String"/>
-        <attribute name="collection" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="cover" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="createdAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="dlcs" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="externalGames" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="firstReleaseDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="follows" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="franchise" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="franchises" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="gameEngines" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="gameModes" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="genres" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="hypes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="involvedCompanies" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="keywords" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="multiplayerModes" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="parentGame" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="platforms" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="playerPerspectives" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="ratingCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="releaseDates" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="remasters" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="screenshots" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="similarGames" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="slug" optional="YES" attributeType="String"/>
-        <attribute name="standaloneExpansions" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="storyline" optional="YES" attributeType="String"/>
-        <attribute name="summary" optional="YES" attributeType="String"/>
-        <attribute name="tags" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="themes" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="totalRating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="totalRatingCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="url" optional="YES" attributeType="String"/>
-        <attribute name="versionParent" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="versionTitle" optional="YES" attributeType="String"/>
-        <attribute name="videos" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="websites" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-    </entity>
-    <entity name="Platform" representedClassName="Platform" syncable="YES" codeGenerationType="class">
-        <attribute name="abbreviation" optional="YES" attributeType="String"/>
-        <attribute name="alternativeName" optional="YES" attributeType="String"/>
-        <attribute name="category" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="checksum" optional="YES" attributeType="String"/>
-        <attribute name="createdAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="generation" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="platformFamily" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="platformLogo" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="slug" optional="YES" attributeType="String"/>
-        <attribute name="summary" optional="YES" attributeType="String"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="url" optional="YES" attributeType="String"/>
-        <attribute name="versions" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-        <attribute name="websites" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
-    </entity>
-    <entity name="Summary" representedClassName="Summary" syncable="YES" codeGenerationType="class">
+        <attribute name="imageID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="originalEntity" optional="YES" attributeType="String"/>
+        <attribute name="textDescription" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Character" positionX="-361.9649047851562" positionY="129.7334594726562" width="128" height="223"/>
-        <element name="Company" positionX="-18" positionY="27" width="128" height="314"/>
-        <element name="Game" positionX="-54" positionY="-9" width="128" height="779"/>
-        <element name="Platform" positionX="-36" positionY="9" width="128" height="269"/>
-        <element name="Summary" positionX="-189" positionY="153" width="128" height="74"/>
+        <element name="Generic" positionX="-189" positionY="180" width="128" height="119"/>
     </elements>
 </model>

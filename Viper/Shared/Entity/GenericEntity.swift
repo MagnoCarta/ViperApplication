@@ -13,7 +13,7 @@ struct GenericEntity: StructDecoder, Hashable {
     let endpoint: Endpoint
     let id: Int?
     let name: String?
-    let description: String?
+    let textDescription: String?
     let imageID: Int?
     let imageURL: String?
     
@@ -23,6 +23,7 @@ struct GenericEntity: StructDecoder, Hashable {
         case name
         case description
         case summary
+        case textDescription
         case mugShot = "mug_shot"
         case logo
         case cover
@@ -41,16 +42,16 @@ extension GenericEntity: Codable {
         imageURL = try? values.decode(String.self, forKey: .imageURL)
         switch endpoint {
         case .character:
-            description = try? values.decode(String.self, forKey: .description)
+            textDescription = try? values.decode(String.self, forKey: .description)
             imageID = try? values.decode(Int.self, forKey: .mugShot)
         case .company:
-            description = try? values.decode(String.self, forKey: .description)
+            textDescription = try? values.decode(String.self, forKey: .description)
             imageID = try? values.decode(Int.self, forKey: .logo)
         case .game:
-            description = try? values.decode(String.self, forKey: .summary)
+            textDescription = try? values.decode(String.self, forKey: .summary)
             imageID = try? values.decode(Int.self, forKey: .cover)
         case .platform:
-            description = try? values.decode(String.self, forKey: .summary)
+            textDescription = try? values.decode(String.self, forKey: .summary)
             imageID = try? values.decode(Int.self, forKey: .platformLogo)
         }
     }
@@ -60,7 +61,7 @@ extension GenericEntity: Codable {
         try container.encode(endpoint.rawValue, forKey: .endpoint)
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
-        try container.encode(description, forKey: .description)
+        try container.encode(textDescription, forKey: .textDescription)
         try container.encode(imageID, forKey: .imageID)
         try container.encode(imageURL, forKey: .imageURL)
     }

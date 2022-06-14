@@ -36,6 +36,19 @@ enum Endpoint: String, Codable, CaseIterable {
         }
     }
     
+    var descriptionType: String {
+        switch self {
+        case .character:
+            return "description"
+        case .company:
+            return "description"
+        case .game:
+            return "summary"
+        case .platform:
+            return "summary"
+        }
+    }
+    
     var endPointFetched: Bool {
         false
     }

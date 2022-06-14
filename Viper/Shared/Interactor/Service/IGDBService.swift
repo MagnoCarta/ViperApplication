@@ -46,13 +46,8 @@ class IGDBService {
         return getFields()[endpointIndex]
     }
     
-    func loadEndpointFullInfo(endpoint: Endpoint, completionHandler: @escaping (Any) -> Void ) {
-        let fields = getFieldsForEndpoint(endpoint: endpoint)
-        loadEndpointsWithFields(endpoint: endpoint,fields: fields, completion: completionHandler)
-    }
-    
-    func loadEndpointSummary(endpoint: Endpoint,page: Int,completion: @escaping (Any) -> Void ) {
-        let fieldsEntity = "fields name, \(endpoint.imageType.1); limit \(requestCount); where \(endpoint.imageType.1) != null; offset \(page * requestCount);"
+    func loadEndpointWithDefaultFields(endpoint: Endpoint, page: Int, completion: @escaping (Any) -> Void ) {
+        let fieldsEntity = "fields name, \(endpoint.imageType.1), \(endpoint.descriptionType); limit \(requestCount); where \(endpoint.imageType.1) != null; offset \(page * requestCount);"
         loadEndpointsWithFields(endpoint: endpoint, fields: fieldsEntity, completion: completion)
     }
     
@@ -143,7 +138,7 @@ class IGDBService {
     func insertURL(endpoint: Endpoint, noURL: GenericEntity, withURL: GenericEntity) -> GenericEntity {
         
         var inserted: GenericEntity
-        inserted = GenericEntity(endpoint: endpoint, id: noURL.id, name: noURL.name, description: noURL.description, imageID: noURL.imageID, imageURL: withURL.imageURL)
+        inserted = GenericEntity(endpoint: endpoint, id: noURL.id, name: noURL.name, textDescription: noURL.textDescription, imageID: noURL.imageID, imageURL: withURL.imageURL)
         
         return inserted
         

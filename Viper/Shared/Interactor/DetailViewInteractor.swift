@@ -22,7 +22,7 @@ class DetailViewInteractor {
     }
     
     func fetchEntity() {
-        let postString = "fields *; where name = \"\(name)\";"
+        let postString = "fields name, \(endpoint.imageType.1), \(endpoint.descriptionType); where name = \"\(name)\";"
         IGDBService.service.loadEndpointsWithFields(endpoint: endpoint, fields: postString) { result in
             self.endpointEntity = (result as! [GenericEntity]).first
             self.presenter?.hasFetchedEntity()

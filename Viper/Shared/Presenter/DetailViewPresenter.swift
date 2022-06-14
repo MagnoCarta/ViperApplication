@@ -34,7 +34,7 @@ class DetailViewPresenter: ObservableObject {
     }
     
     func getDescription() -> String {
-        return interactor?.endpointEntity?.description ?? "No Description"
+        return interactor?.endpointEntity?.textDescription ?? "No Description"
     }
     
     func hasLoadedEntity() -> Bool {

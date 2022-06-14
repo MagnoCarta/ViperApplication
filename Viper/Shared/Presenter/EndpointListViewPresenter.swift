@@ -22,7 +22,7 @@ class EndpointListViewPresenter: ObservableObject {
     }
     
     // MARK: Get Functions
-    func getSummaries() -> [SummaryEntity] {
+    func getSummaries() -> [GenericEntity] {
         interactor.summaries
     }
     
@@ -55,7 +55,7 @@ class EndpointListViewPresenter: ObservableObject {
     }
     
     // MARK: Pagination
-    func changePageIfNeeded(summary: SummaryEntity?) {
+    func changePageIfNeeded(summary: GenericEntity?) {
         interactor.loadMoreContentIfNeeded(summary: summary)
     }
 }
