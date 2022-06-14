@@ -20,6 +20,7 @@ class IGDBService {
     
     var allEndpoints: [Endpoint] = []
     var fetchingImages = false
+    let requestCount = 20
     
     func getUrlForEndpoint(endpoint: Endpoint,isFetchingImage: Bool) -> URL? {
         var endpointString = endpoint.rawValue
@@ -51,7 +52,7 @@ class IGDBService {
     }
     
     func loadEndpointSummary(endpoint: Endpoint,page: Int,completion: @escaping (Any) -> Void ) {
-        let fieldsEntity = "fields name, \(endpoint.imageType.1); limit 20; where \(endpoint.imageType.1) != null; offset \(page * 20);"
+        let fieldsEntity = "fields name, \(endpoint.imageType.1); limit \(requestCount); where \(endpoint.imageType.1) != null; offset \(page * requestCount);"
         loadEndpointsWithFields(endpoint: endpoint, fields: fieldsEntity, completion: completion)
     }
     
@@ -123,7 +124,7 @@ class IGDBService {
         }
         filteredField.removeLast()
         filteredField = "\(filteredField));"
-        print(filteredField)
+        filteredField += " limit \(requestCount);"
         let postString = filteredField
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in

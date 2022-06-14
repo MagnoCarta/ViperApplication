@@ -13,8 +13,9 @@ class MainViewRouter {
   func makeEndpointListView(for endpointName: Endpoint) -> EndpointListView {
       let interactor = EndpointListViewInteractor()
       let endpointListViewPresenter = EndpointListViewPresenter(interactor: interactor)
+      let endpointListView = EndpointListView(presenter: endpointListViewPresenter)
       endpointListViewPresenter.fetchEndpoint(endpoint: endpointName)
-      return EndpointListView(presenter: endpointListViewPresenter)
+      return endpointListView
   }
 }
 

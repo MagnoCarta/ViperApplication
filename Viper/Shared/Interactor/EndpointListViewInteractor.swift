@@ -40,7 +40,6 @@ class EndpointListViewInteractor {
     
     func fetchEndpoint(endpoint: Endpoint) {
         self.endpoint = endpoint
-        self.fetchSummary()
     }
     
 }

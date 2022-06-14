@@ -29,7 +29,7 @@ struct EndpointListView: View {
                             NavigationLazyView(presenter.moveToDetailView(name: summaryName))
                         }
                     } label: {
-                        buildCard(endpoint: presenter.endpointName, name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")
+                        buildCard(endpoint: presenter.getEndpoint(), name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")
                             .onAppear(){
                                 presenter.changePageIfNeeded(summary: summary)
                             }
@@ -38,15 +38,16 @@ struct EndpointListView: View {
                 }
             }
             .padding()
-            .navigationTitle(presenter.endpointName.rawValue)
+            .navigationTitle(presenter.getEndpoint().rawValue)
         }
     }
     
     func buildCard(endpoint: Endpoint,name: String,imageURL: String) -> EndpointCard {
         let interactor = EndpointCardInteractor()
         let endpointPresenter = EndpointCardPresenter(interactor: interactor)
+        let endpointCard = EndpointCard(presenter: endpointPresenter, isTextCentered: false)
         endpointPresenter.fetchCard(endpoint: endpoint, name: name, imageURL: imageURL)
-        return EndpointCard(presenter: endpointPresenter, isTextCentered: false)
+        return endpointCard
     }
     
 }

@@ -12,7 +12,6 @@ class EndpointListViewPresenter: ObservableObject {
     // MARK: Variables
     private var interactor: EndpointListViewInteractor
     private let router: EndpointListViewRouter = EndpointListViewRouter()
-    var endpointName: Endpoint = Endpoint.character
     var view: EndpointListView?
     @Published var updateToggle: Bool = false
     
@@ -48,7 +47,7 @@ class EndpointListViewPresenter: ObservableObject {
     
     // MARK: Router
     func moveToDetailView(name: String) -> DetailView {
-        return router.makeDetailView(endpoint: endpointName,for: name)
+        return router.makeDetailView(endpoint: getEndpoint(),for: name)
     }
     
     // MARK: Pagination

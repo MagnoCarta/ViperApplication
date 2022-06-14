@@ -25,7 +25,7 @@ struct MainView: View {
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(presenter.getNames(),id:\.self) { endpoint in
                         NavigationLink {
-                            presenter.moveToEndpointListView(endpoint: endpoint)
+                            NavigationLazyView(presenter.moveToEndpointListView(endpoint: endpoint))
                         } label: {
                             buildCard(endpoint: endpoint)
                         }
