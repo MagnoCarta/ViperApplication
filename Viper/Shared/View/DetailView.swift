@@ -15,10 +15,19 @@ struct DetailView: View {
     
     var body: some View {
         presenter.view = self
-        return VStack {
+        return ScrollView {
             AsyncImage(url: URL(string: "https:\(presenter.getImageURL())"))
+                .padding(.vertical, 16)
+            if presenter.hasLoadedEntity() {
+                Text(presenter.getDescription())
+            } else {
+                ProgressView()
+                    .scaleEffect(x: 3, y: 3, anchor: .top)
+            }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(presenter.getName())
+        .padding(.horizontal, 24)
     }
     
 }

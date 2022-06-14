@@ -26,11 +26,19 @@ class DetailViewPresenter: ObservableObject {
     }
     
     func getImageURL() -> String {
-        return interactor?.endpointEntity?.imageURL ?? ""
+        guard let imageURL = interactor?.endpointEntity?.imageURL else {
+            return ""
+        }
+        let bigCover = imageURL.replacingOccurrences(of: "thumb", with: "cover_big")
+        return bigCover
     }
     
-    func getEntity() -> GenericEntity? {
-        return interactor?.endpointEntity
+    func getDescription() -> String {
+        return interactor?.endpointEntity?.description ?? "No Description"
+    }
+    
+    func hasLoadedEntity() -> Bool {
+        return interactor?.endpointEntity != nil
     }
     
     // MARK: Fetch Functions

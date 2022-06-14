@@ -30,6 +30,10 @@ class EndpointListViewPresenter: ObservableObject {
         interactor.endpoint
     }
     
+    func hasLoadedSummaries() -> Bool {
+        return !interactor.summaries.isEmpty
+    }
+    
     // MARK: Fetch Functions
     func fetchEndpoint(endpoint: Endpoint) {
         interactor.fetchEndpoint(endpoint: endpoint)

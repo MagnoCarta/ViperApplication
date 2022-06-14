@@ -22,24 +22,35 @@ struct EndpointListView: View {
         presenter.view = self
         presenter.changePageIfNeeded(summary: nil)
         return ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(presenter.getSummaries(),id:\.self) { summary in
-                    NavigationLink {
-                        if let summaryName = summary.name {
-                            NavigationLazyView(presenter.moveToDetailView(name: summaryName))
-                        }
-                    } label: {
-                        buildCard(endpoint: presenter.getEndpoint(), name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")
-                            .onAppear(){
-                                presenter.changePageIfNeeded(summary: summary)
-                            }
-                    }
-                    .frame(width: 150, height: 150, alignment: .center)
-                }
+            if presenter.hasLoadedSummaries() {
+                grid
+            } else {
+                ProgressView()
+                    .scaleEffect(CGSize(width: 3, height: 3))
+                // TODO: remove gambiarra
+                Text("              ")
             }
-            .padding()
-            .navigationTitle(presenter.getEndpoint().rawValue)
         }
+    }
+    
+    var grid: some View {
+        LazyVGrid(columns: columns, spacing: 16) {
+            ForEach(presenter.getSummaries(),id:\.self) { summary in
+                NavigationLink {
+                    if let summaryName = summary.name {
+                        NavigationLazyView(presenter.moveToDetailView(name: summaryName))
+                    }
+                } label: {
+                    buildCard(endpoint: presenter.getEndpoint(), name: summary.name ?? "No Name", imageURL: summary.imageURL ?? "No url")
+                        .onAppear(){
+                            presenter.changePageIfNeeded(summary: summary)
+                        }
+                }
+                .frame(width: 150, height: 150, alignment: .center)
+            }
+        }
+        .padding()
+        .navigationTitle(presenter.getEndpoint().rawValue)
     }
     
     func buildCard(endpoint: Endpoint,name: String,imageURL: String) -> EndpointCard {
