@@ -14,6 +14,7 @@ struct ViperApp: App {
     var body: some Scene {
         WindowGroup {
             createView()
+                .preferredColorScheme(.dark)
         }
     }
     

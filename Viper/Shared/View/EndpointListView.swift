@@ -17,6 +17,12 @@ struct EndpointListView: View {
     let height: CGFloat = 150
     @ObservedObject var presenter: EndpointListViewPresenter
     
+    init(presenter: EndpointListViewPresenter) {
+        self.presenter = presenter
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
     
     var body: some View {
         presenter.view = self
@@ -28,9 +34,12 @@ struct EndpointListView: View {
                 ProgressView()
                     .scaleEffect(CGSize(width: 3, height: 3))
                 // TODO: remove gambiarra
-                Text("              ")
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .scaledToFill()
             }
         }
+        .background(Color.darkPurple)
     }
     
     var grid: some View {

@@ -15,19 +15,30 @@ struct DetailView: View {
     
     var body: some View {
         presenter.view = self
-        return ScrollView {
-            AsyncImage(url: URL(string: "https:\(presenter.getImageURL())"))
-                .padding(.vertical, 16)
-            if presenter.hasLoadedEntity() {
-                Text(presenter.getDescription())
-            } else {
+        return VStack {
+            AsyncImage(url: URL(string: "https:\(presenter.getImageURL())")) { image in
+                image
+                    .resizable()
+                    .padding(.vertical, 16)
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5, alignment: .top)
+            } placeholder: {
                 ProgressView()
-                    .scaleEffect(x: 3, y: 3, anchor: .top)
+            }
+            Text(presenter.getName())
+                .font(.system(size: 24))
+                .fontWeight(.bold)
+            ScrollView {
+                if presenter.hasLoadedEntity() {
+                    Text(presenter.getDescription())
+                        .padding(.horizontal, 24)
+                } else {
+                    ProgressView()
+                        .scaleEffect(x: 3, y: 3, anchor: .top)
+                }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(presenter.getName())
-        .padding(.horizontal, 24)
+        .background(Color.darkPurple)
     }
     
 }

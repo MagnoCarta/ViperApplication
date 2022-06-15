@@ -22,16 +22,18 @@ struct EndpointCard: View {
     func setUpView() -> some View {
         Rectangle()
             .cornerRadius(15)
-            .foregroundColor(.blue)
+            .foregroundColor(.darkPink)
+        
+            .shadow(color: Color.gray, radius: 3, x: 0, y: 0)
             .overlay(alignment: .center, content: {
                 if isTextCentered {
                     Text(presenter.getName())
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                 } else {
                     VStack {
                         AsyncImage(url: URL(string: "https:\(presenter.getImageURL())"))
                         Text(presenter.getName())
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                     }
                 }
             })

@@ -34,13 +34,14 @@ struct MainView: View {
                 }
                 .padding()
             }
+            .background(Color.darkPurple)
             .navigationTitle("Endpoints")
         }
 #elseif os(macOS)
-        NavigationView {
+        return NavigationView {
             List(presenter.getNames(),id:\.self) { endpoint in
                         NavigationLink {
-                            presenter.moveToEndpointList(endpoint: endpoint)
+                            presenter.moveToEndpointListView(endpoint: endpoint)
                         } label: {
                             buildCard(endpoint: endpoint)
                         }
@@ -48,6 +49,7 @@ struct MainView: View {
                     }
                 }
             .navigationTitle("Endpoints")
+            .navigationViewStyle(.columns)
 #endif
     }
     
