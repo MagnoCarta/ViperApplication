@@ -35,7 +35,7 @@ class EndpointListViewInteractor {
         IGDBService.service.loadEndpointWithDefaultFields(endpoint: endpoint, page: page, completion: { result in
             let entities = result as! [GenericEntity]
             self.summaries.append(contentsOf: entities)
-            CoreDataService.service.saveEntities(entities: self.summaries)
+            CoreDataService.service.saveEntities(entities: entities)
             self.page = (self.summaries.count / IGDBService.requestCount)
             self.presenter?.hasFetched()
         })

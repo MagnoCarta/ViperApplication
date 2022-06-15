@@ -15,6 +15,8 @@
 		5738AEE3284D56B100FE37F4 /* DetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5738AEE1284D56B100FE37F4 /* DetailViewPresenter.swift */; };
 		57B2F692284708A100811ED0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2F691284708A100811ED0 /* Endpoint.swift */; };
 		57B2F693284708A100811ED0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2F691284708A100811ED0 /* Endpoint.swift */; };
+		57C6C656285964C00066AF39 /* GenericExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C6C655285964C00066AF39 /* GenericExtension.swift */; };
+		57C6C657285964C00066AF39 /* GenericExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C6C655285964C00066AF39 /* GenericExtension.swift */; };
 		57EE1AF728519264001359F7 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EE1AF628519264001359F7 /* NavigationLazyView.swift */; };
 		57EE1AF82851926C001359F7 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EE1AF628519264001359F7 /* NavigationLazyView.swift */; };
 		6C0DAC0428401E4800B3E75C /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DAC0328401E4800B3E75C /* Tests_iOS.swift */; };
@@ -87,6 +89,7 @@
 		5738AEDE284D568000FE37F4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		5738AEE1284D56B100FE37F4 /* DetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresenter.swift; sourceTree = "<group>"; };
 		57B2F691284708A100811ED0 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		57C6C655285964C00066AF39 /* GenericExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericExtension.swift; sourceTree = "<group>"; };
 		57EE1AF628519264001359F7 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		6C0DABE928401E4600B3E75C /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		6C0DABEA28401E4600B3E75C /* ViperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViperApp.swift; sourceTree = "<group>"; };
@@ -263,6 +266,7 @@
 			children = (
 				6CAD6B90284D464000C688F2 /* BaseEntity */,
 				6CAD6B892847948E00C688F2 /* GenericEntity.swift */,
+				57C6C655285964C00066AF39 /* GenericExtension.swift */,
 				57B2F691284708A100811ED0 /* Endpoint.swift */,
 				6C0DABE828401E4600B3E75C /* Viper.xcdatamodeld */,
 			);
@@ -466,6 +470,7 @@
 				6CAD6B92284D486200C688F2 /* CoreDataService.swift in Sources */,
 				6C0DAC40284063B000B3E75C /* MainViewRouter.swift in Sources */,
 				6C0DAC3A2840639B00B3E75C /* MainViewPresenter.swift in Sources */,
+				57C6C656285964C00066AF39 /* GenericExtension.swift in Sources */,
 				6C0DAC4628419F5400B3E75C /* EndpointCard.swift in Sources */,
 				6C0DAC522841B57800B3E75C /* EndpointListView.swift in Sources */,
 				6C64383228501D1C0008DAD3 /* EndpointListViewRouter.swift in Sources */,
@@ -498,6 +503,7 @@
 				6CAD6B93284D486200C688F2 /* CoreDataService.swift in Sources */,
 				6C0DAC41284063B000B3E75C /* MainViewRouter.swift in Sources */,
 				6C0DAC3B2840639B00B3E75C /* MainViewPresenter.swift in Sources */,
+				57C6C657285964C00066AF39 /* GenericExtension.swift in Sources */,
 				6C0DAC4728419F5400B3E75C /* EndpointCard.swift in Sources */,
 				6C0DAC532841B57800B3E75C /* EndpointListView.swift in Sources */,
 				6C64383328501D1C0008DAD3 /* EndpointListViewRouter.swift in Sources */,

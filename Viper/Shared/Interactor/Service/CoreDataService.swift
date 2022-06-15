@@ -16,10 +16,7 @@ class CoreDataService {
     private init() {}
     
     func saveEntities(entities: [StructDecoder]) {
-        let _: [NSManagedObject] = entities.compactMap({ entity in
-            if existsInCoreData(entity: entity as! GenericEntity) {
-                return nil
-            }
+        _ = entities.compactMap({ entity in
             return try? entity.toCoreData(context: context)
         })
         do {
@@ -33,25 +30,14 @@ class CoreDataService {
     func getEntities(endpoint: Endpoint) -> [GenericEntity] {
         let entitiesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: GenericEntity.entityName)
         let predicate = NSPredicate(format: "endpoint == %@", endpoint.rawValue)
+        let descriptor = NSSortDescriptor(key: "creationDate", ascending: true)
         entitiesFetchRequest.predicate = predicate
+        entitiesFetchRequest.sortDescriptors = [descriptor]
         do {
             let entities = try PersistenceController.shared.container.viewContext.fetch(entitiesFetchRequest)
             return convertToGenericEntities(entities: entities as! [Generic])
         } catch {
             return []
-        }
-    }
-    
-    func existsInCoreData(entity: GenericEntity) -> Bool {
-        let entitiesFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: GenericEntity.entityName)
-        let predicate = NSPredicate(format: "endpoint == %@ AND id == %d", entity.endpoint.rawValue, entity.id!)
-        entitiesFetchRequest.predicate = predicate
-        do {
-            let entities = try PersistenceController.shared.container.viewContext.fetch(entitiesFetchRequest)
-            return entities.first != nil
-        } catch {
-            print("It was not possible to fetch")
-            return false
         }
     }
     
